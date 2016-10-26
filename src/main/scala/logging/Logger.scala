@@ -12,5 +12,7 @@ trait Logger {
   def error(msg:String,curMethod:CDSMethod) = relayMessage(msg,curMethod,"error")
   def warn(msg:String,curMethod:CDSMethod) = relayMessage(msg,curMethod,"warn")
 
+  def datastoreUpdated(by:CDSMethod,values:Map[String,String])
+
   def teardown:Boolean
 }

@@ -27,4 +27,7 @@ class Log4jLogger extends Logger {
   }
 
   override def teardown: Boolean = true
+
+  override def datastoreUpdated(by: CDSMethod, values: Map[String, String]): Unit = {}
+
 }

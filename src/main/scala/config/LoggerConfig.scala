@@ -30,6 +30,7 @@ case class LoggerConfig(name: String, enabled: Boolean, params: Map[String,Strin
   }
 
   def makeInstance:Option[Logger] = {
+    println("INFO: Attempting to initialise logger " + name)
     try
       Some(Class.forName(name).newInstance().asInstanceOf[Logger])
     catch {
