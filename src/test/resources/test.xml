@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+
+<route name="test" type="active">
+    <input-method name="commandline"/>
+
+    <input-method name="something">
+        <take-files>media|inmeta</take-files>
+        <hostname>robert</hostname>
+        <username>kenneth</username>
+        <password>rabbit</password>
+    </input-method>
+</route>
