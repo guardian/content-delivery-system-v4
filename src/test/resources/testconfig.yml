@@ -1,4 +1,4 @@
 loggers:
-  - name: FirstLogger
+  - name: logging.Log4jLogger
     enabled: "true"
     Param1: val1

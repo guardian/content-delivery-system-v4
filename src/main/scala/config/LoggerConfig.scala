@@ -1,4 +1,6 @@
 package config
+import logging.Logger
+import java.lang.ClassNotFoundException
 import scala.collection.JavaConversions._
 
 /**
@@ -25,5 +27,15 @@ case class LoggerConfig(name: String, enabled: Boolean, params: Map[String,Strin
     println("\tLogger name: "+name)
     println("\tEnabled? " + enabled)
     println("\tOther parameters: " + params)
+  }
+
+  def makeInstance:Option[Logger] = {
+    try
+      Some(Class.forName(name).newInstance().asInstanceOf[Logger])
+    catch {
+      case e:ClassNotFoundException=>
+        println("-ERROR: Logger " + name + " could not be loaded (class not found).  Please check your config file.")
+        None
+    }
   }
 }

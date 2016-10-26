@@ -1,6 +1,8 @@
 package config
 
+import logging.LogCollection
 import org.yaml.snakeyaml.Yaml
+
 import scala.collection.JavaConversions._
 
 /**
@@ -33,9 +35,14 @@ object CDSConfig {
     )
 
   }
+
+  def placeholder = CDSConfig(Set())
 }
 
 case class CDSConfig(loggers:Set[LoggerConfig]) {
+  def getLogCollection:LogCollection = {
+    LogCollection.fromConfig(loggers)
+  }
   def dump = {
     println("Logger config:")
     loggers.foreach(x=>x.dump)

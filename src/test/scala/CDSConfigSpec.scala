@@ -7,4 +7,12 @@ class CDSConfigSpec extends FlatSpec with Matchers {
     val cfg = CDSConfig.load("src/test/resources/testconfig.yml")
     cfg.dump
   }
+
+  it should "return a LogCollection for the setup loggers" in {
+    val cfg = CDSConfig.load("src/test/resources/testconfig.yml")
+    cfg.loggers.size should be (1)
+    val lc = cfg.getLogCollection
+    lc.activeLoggerCount should be (1)
+
+  }
 }

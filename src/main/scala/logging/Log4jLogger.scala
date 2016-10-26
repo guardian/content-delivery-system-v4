@@ -11,7 +11,7 @@ import scala.concurrent.ExecutionContext.Implicits.global
 class Log4jLogger extends Logger {
   val l4j = LogManager.getLogger("route")
 
-  override def init: Boolean = true
+  override def init(params:Map[String,String]):Logger = this
 
   override def relayMessage(msg: String, curMethod: CDSMethod, severity: String): Unit = {
     Future {

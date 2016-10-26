@@ -1,6 +1,7 @@
 package CDS
 
 import logging.LogCollection
+import config.CDSConfig
 
 import scala.io.Source
 import scala.xml.Node
@@ -17,15 +18,6 @@ object CDSRoute {
   }
 
   def getMethodParams(n:Node):Map[String,String] = {
-//    Map(n.child.filter(
-//      x=>{
-//        x.label match {
-//          case "#PCDATA"=>false
-//          case "take-files"=>false
-//          case _=>true
-//        }
-//      }
-//    ).map (x=>{x.label->x.text}): _*)
     n.child.filter(
       x=>{
         x.label match {
@@ -48,32 +40,33 @@ object CDSRoute {
     getMethodAttrib(n,"name")
   }
 
-  def readRoute(x: Node):CDSRoute = {
+  def readRoute(x: Node,config:CDSConfig):CDSRoute = {
+    val logCollection = config.getLogCollection
     val methodList:Seq[CDSMethod] = x.nonEmptyChildren.
       filter(z=>{!z.isAtom}).
       map(y =>{
-        CDSMethod(y.label,getMethodName(y),getFileRequirements(y),getMethodParams(y))
+        CDSMethod(y.label,getMethodName(y),getFileRequirements(y),getMethodParams(y),logCollection)
       })
-    CDSRoute(getMethodName(x),getMethodAttrib(x,"type"),methodList)
+    CDSRoute(getMethodName(x),getMethodAttrib(x,"type"),methodList,config)
   }
 
-  def fromFile(filename:String) = {
+  def fromFile(filename:String,config:CDSConfig) = {
     val src = Source.fromFile(filename,"utf8")
     val parser = new ConstructingParser(src,true)
     parser.initialize
     val doc = parser.document()
 
-    readRoute(doc.children.head)
+    readRoute(doc.children.head,config)
   }
 }
 
-case class CDSRoute(name: String,routetype:String,methods:Seq[CDSMethod]) {
+case class CDSRoute(name: String,routetype:String,methods:Seq[CDSMethod],config:CDSConfig) {
   def dump = {
     println("Got route name " + name + " (" + routetype + ")")
     methods.foreach(x=>{x.dump})
   }
 
   def runRoute(loggerCollection:LogCollection) = {
-    methods.foreach(curMethod=>{curMethod.execute(loggerCollection)})
+    methods.foreach(curMethod=>{curMethod.execute})
   }
 }

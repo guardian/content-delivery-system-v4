@@ -2,7 +2,7 @@ package logging
 import CDS.CDSMethod
 
 trait Logger {
-  def init:Boolean
+  def init(params:Map[String,String]):Logger
 
   def relayMessage(msg:String,curMethod:CDSMethod,severity:String)
   def relayMessage(m: LogMessage): Unit = relayMessage(m.msg,m.sender,m.severity)

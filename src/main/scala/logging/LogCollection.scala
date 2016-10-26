@@ -1,12 +1,29 @@
 package logging
 
 import CDS.CDSMethod
+
 import scala.collection.mutable.SynchronizedQueue
 import java.util.concurrent.ConcurrentLinkedQueue
+
+import config.LoggerConfig
 
 /**
   * Created by localhome on 21/10/2016.
   */
+
+object LogCollection {
+  def fromConfig(loggerInfo:Set[LoggerConfig]) = {
+    val optionInstances = loggerInfo.filter(x=>x.enabled).map(x=>x.makeInstance)
+
+    val validInstances = optionInstances.filter(x=>x match {
+                                                  case Some(logger)=>true
+                                                  case None=>false
+                                                }).map(x=>x.get)
+    LogCollection(validInstances.toSeq)
+  }
+}
+
+
 case class LogCollection(activeLoggers:Seq[Logger]) {
   val DEFAULT_SLEEP_DELAY = 1000 //milliseconds
   val logQueue = new ConcurrentLinkedQueue[Option[LogMessage]]
@@ -26,10 +43,7 @@ case class LogCollection(activeLoggers:Seq[Logger]) {
     }
   }
 
-  def init = {
-    val t = new Thread(new logProcessor(logQueue))
-    activeLoggers.foreach(x=>x.init)
-  }
+  def activeLoggerCount:Integer = activeLoggers.size
 
   //def relayMessage(msg:String,currentMethod:CDSMethod,severity:String) = activeLoggers.foreach(x=>x.relayMessage(msg,currentMethod,severity))
   def relayMessage(msg:String, sender:CDSMethod, severity: String) = logQueue.add(Some(LogMessage(msg,severity,sender)))
