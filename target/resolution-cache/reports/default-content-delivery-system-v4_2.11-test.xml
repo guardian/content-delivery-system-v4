@@ -7,7 +7,7 @@
 		revision="1.0"
 		conf="test"
 		confs="compile, runtime, test, provided, optional, compile-internal, runtime-internal, test-internal, plugin, sources, docs, pom, scala-tool"
-		date="20161026145434"/>
+		date="20161026155253"/>
 	<dependencies>
 		<module organisation="org.scalatest" name="scalatest_2.11">
 			<revision name="3.0.0" status="release" pubdate="20160801151153" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://www.scalatest.org" downloaded="false" searched="false" default="false" conf="default, compile, runtime, default(compile), master" position="13">
@@ -126,6 +126,26 @@
 				</artifacts>
 			</revision>
 		</module>
+		<module organisation="org.yaml" name="snakeyaml">
+			<revision name="1.17" status="release" pubdate="20160219133754" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://www.snakeyaml.org" downloaded="false" searched="false" default="false" conf="default, compile, runtime, default(compile), master, runtime(*), master(compile), compile(*)" position="6">
+				<license name="Apache License, Version 2.0" url="http://www.apache.org/licenses/LICENSE-2.0.txt"/>
+				<metadata-artifact status="no" details="" size="3830" time="0" location="/Users/localhome/.ivy2/cache/org.yaml/snakeyaml/ivy-1.17.xml" searched="false" origin-is-local="false" origin-location="https://jcenter.bintray.com/org/yaml/snakeyaml/1.17/snakeyaml-1.17.pom"/>
+				<caller organisation="default" name="content-delivery-system-v4_2.11" conf="test, compile, runtime" rev="1.17" rev-constraint-default="1.17" rev-constraint-dynamic="1.17" callerrev="1.0"/>
+				<caller organisation="com.fasterxml.jackson.dataformat" name="jackson-dataformat-yaml" conf="default, compile, runtime, master" rev="1.15" rev-constraint-default="1.15" rev-constraint-dynamic="1.15" callerrev="2.8.2"/>
+				<artifacts>
+					<artifact name="snakeyaml" type="bundle" ext="jar" status="no" details="" size="273599" time="0" location="/Users/localhome/.ivy2/cache/org.yaml/snakeyaml/bundles/snakeyaml-1.17.jar">
+						<origin-location is-local="false" location="https://jcenter.bintray.com/org/yaml/snakeyaml/1.17/snakeyaml-1.17.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+			<revision name="1.15" evicted="latest-revision" evicted-reason="" downloaded="false" searched="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master, default(compile)" position="-1">
+				<evicted-by rev="1.17"/>
+				<caller organisation="default" name="content-delivery-system-v4_2.11" conf="test, compile, runtime" rev="1.17" rev-constraint-default="1.17" rev-constraint-dynamic="1.17" callerrev="1.0"/>
+				<caller organisation="com.fasterxml.jackson.dataformat" name="jackson-dataformat-yaml" conf="default, compile, runtime, master" rev="1.15" rev-constraint-default="1.15" rev-constraint-dynamic="1.15" callerrev="2.8.2"/>
+				<artifacts>
+				</artifacts>
+			</revision>
+		</module>
 		<module organisation="com.fasterxml.jackson.dataformat" name="jackson-dataformat-yaml">
 			<revision name="2.8.2" status="release" pubdate="20160830050048" resolver="sbt-chain" artresolver="sbt-chain" homepage="https://github.com/FasterXML/jackson" downloaded="false" searched="false" default="false" conf="default, compile, runtime, default(compile), master" position="4">
 				<license name="The Apache Software License, Version 2.0" url="http://www.apache.org/licenses/LICENSE-2.0.txt"/>
@@ -134,18 +154,6 @@
 				<artifacts>
 					<artifact name="jackson-dataformat-yaml" type="bundle" ext="jar" status="no" details="" size="40809" time="0" location="/Users/localhome/.ivy2/cache/com.fasterxml.jackson.dataformat/jackson-dataformat-yaml/bundles/jackson-dataformat-yaml-2.8.2.jar">
 						<origin-location is-local="false" location="https://repo1.maven.org/maven2/com/fasterxml/jackson/dataformat/jackson-dataformat-yaml/2.8.2/jackson-dataformat-yaml-2.8.2.jar"/>
-					</artifact>
-				</artifacts>
-			</revision>
-		</module>
-		<module organisation="org.yaml" name="snakeyaml">
-			<revision name="1.15" status="release" pubdate="20150219132710" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://www.snakeyaml.org" downloaded="false" searched="false" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="6">
-				<license name="Apache License Version 2.0" url="LICENSE.txt"/>
-				<metadata-artifact status="no" details="" size="3591" time="0" location="/Users/localhome/.ivy2/cache/org.yaml/snakeyaml/ivy-1.15.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/yaml/snakeyaml/1.15/snakeyaml-1.15.pom"/>
-				<caller organisation="com.fasterxml.jackson.dataformat" name="jackson-dataformat-yaml" conf="default, compile, runtime, master" rev="1.15" rev-constraint-default="1.15" rev-constraint-dynamic="1.15" callerrev="2.8.2"/>
-				<artifacts>
-					<artifact name="snakeyaml" type="bundle" ext="jar" status="no" details="" size="269295" time="0" location="/Users/localhome/.ivy2/cache/org.yaml/snakeyaml/bundles/snakeyaml-1.15.jar">
-						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/yaml/snakeyaml/1.15/snakeyaml-1.15.jar"/>
 					</artifact>
 				</artifacts>
 			</revision>
@@ -190,8 +198,8 @@
 			</revision>
 		</module>
 		<module organisation="org.apache.logging.log4j" name="log4j-api">
-			<revision name="2.7" status="release" pubdate="20161002191433" resolver="jcenter" artresolver="jcenter" homepage="" downloaded="true" searched="true" default="false" conf="default, compile, runtime, default(compile), master" position="3">
-				<metadata-artifact status="successful" details="" size="8671" time="163" location="/Users/localhome/.ivy2/cache/org.apache.logging.log4j/log4j-api/ivy-2.7.xml" searched="true" original-local-location="/Users/localhome/.ivy2/cache/org.apache.logging.log4j/log4j-api/ivy-2.7.xml.original" origin-is-local="false" origin-location="https://jcenter.bintray.com/org/apache/logging/log4j/log4j-api/2.7/log4j-api-2.7.pom"/>
+			<revision name="2.7" status="release" pubdate="20161002191433" resolver="public" artresolver="public" homepage="" downloaded="true" searched="true" default="false" conf="default, compile, runtime, default(compile), master" position="3">
+				<metadata-artifact status="successful" details="" size="8671" time="20" location="/Users/localhome/.ivy2/cache/org.apache.logging.log4j/log4j-api/ivy-2.7.xml" searched="true" original-local-location="/Users/localhome/.ivy2/cache/org.apache.logging.log4j/log4j-api/ivy-2.7.xml.original" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/apache/logging/log4j/log4j-api/2.7/log4j-api-2.7.pom"/>
 				<caller organisation="default" name="content-delivery-system-v4_2.11" conf="test, compile, runtime" rev="2.7" rev-constraint-default="2.7" rev-constraint-dynamic="2.7" callerrev="1.0"/>
 				<artifacts>
 					<artifact name="log4j-api" type="jar" ext="jar" status="no" details="" size="219001" time="0" location="/Users/localhome/.ivy2/cache/org.apache.logging.log4j/log4j-api/jars/log4j-api-2.7.jar">

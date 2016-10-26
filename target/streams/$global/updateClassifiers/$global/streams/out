@@ -8,7 +8,7 @@
 [debug] == resolving dependencies for default#content-delivery-system-v4$sources_2.11;1.0 [compile]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.scala-lang#scala-library;2.11.8 [compile->default(compile)]
 [info] Resolving org.scala-lang#scala-library;2.11.8 ...
-[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@4e822ff0
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@498685b9
 [debug] sbt-chain: module revision found in cache: org.scala-lang#scala-library;2.11.8
 [debug] 	found org.scala-lang#scala-library;2.11.8 in sbt-chain
 [debug] 	[2.11.8] org.scala-lang#scala-library;2.11.8
@@ -17,7 +17,7 @@
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.scala-lang#scala-library;2.11.8 [compile->master]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.scala-lang#scala-xml;2.11.0-M4 [compile->default(compile)]
 [info] Resolving org.scala-lang#scala-xml;2.11.0-M4 ...
-[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@a321630
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@29996f47
 [debug] sbt-chain: module revision found in cache: org.scala-lang#scala-xml;2.11.0-M4
 [debug] 	found org.scala-lang#scala-xml;2.11.0-M4 in sbt-chain
 [debug] 	[2.11.0-M4] org.scala-lang#scala-xml;2.11.0-M4
@@ -26,7 +26,7 @@
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.scala-lang#scala-xml;2.11.0-M4 [compile->master]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.apache.logging.log4j#log4j-core;2.7 [compile->default(compile)]
 [info] Resolving org.apache.logging.log4j#log4j-core;2.7 ...
-[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@1181d546
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@3db8a442
 [debug] sbt-chain: module revision found in cache: org.apache.logging.log4j#log4j-core;2.7
 [debug] 	found org.apache.logging.log4j#log4j-core;2.7 in sbt-chain
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.apache.logging.log4j#log4j-core;2.7 [compile->runtime]
@@ -34,7 +34,7 @@
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.apache.logging.log4j#log4j-core;2.7 [compile->master]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.apache.logging.log4j#log4j-api;2.7 [compile->default(compile)]
 [info] Resolving org.apache.logging.log4j#log4j-api;2.7 ...
-[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@7800a25f
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@d4e75b9
 [debug] sbt-chain: module revision found in cache: org.apache.logging.log4j#log4j-api;2.7
 [debug] 	found org.apache.logging.log4j#log4j-api;2.7 in sbt-chain
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.apache.logging.log4j#log4j-api;2.7 [compile->runtime]
@@ -42,7 +42,7 @@
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.apache.logging.log4j#log4j-api;2.7 [compile->master]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.dataformat#jackson-dataformat-yaml;2.8.2 [compile->default(compile)]
 [info] Resolving com.fasterxml.jackson.dataformat#jackson-dataformat-yaml;2.8.2 ...
-[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@35b3d517
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@47a574b7
 [debug] sbt-chain: module revision found in cache: com.fasterxml.jackson.dataformat#jackson-dataformat-yaml;2.8.2
 [debug] 	found com.fasterxml.jackson.dataformat#jackson-dataformat-yaml;2.8.2 in sbt-chain
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.dataformat#jackson-dataformat-yaml;2.8.2 [compile->runtime]
@@ -50,23 +50,15 @@
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.dataformat#jackson-dataformat-yaml;2.8.2 [compile->master]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-core;2.8.2 [compile->default(compile)]
 [info] Resolving com.fasterxml.jackson.core#jackson-core;2.8.2 ...
-[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@673727ae
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@2884c918
 [debug] sbt-chain: module revision found in cache: com.fasterxml.jackson.core#jackson-core;2.8.2
 [debug] 	found com.fasterxml.jackson.core#jackson-core;2.8.2 in sbt-chain
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-core;2.8.2 [compile->runtime]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-core;2.8.2 [compile->compile]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-core;2.8.2 [compile->master]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [compile->default(compile)]
-[info] Resolving org.yaml#snakeyaml;1.15 ...
-[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@5e659dd2
-[debug] sbt-chain: module revision found in cache: org.yaml#snakeyaml;1.15
-[debug] 	found org.yaml#snakeyaml;1.15 in sbt-chain
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [compile->runtime]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [compile->compile]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [compile->master]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-databind;2.8.2 [compile->default(compile)]
 [info] Resolving com.fasterxml.jackson.core#jackson-databind;2.8.2 ...
-[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@59d7088b
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@4147baea
 [debug] sbt-chain: module revision found in cache: com.fasterxml.jackson.core#jackson-databind;2.8.2
 [debug] 	found com.fasterxml.jackson.core#jackson-databind;2.8.2 in sbt-chain
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-databind;2.8.2 [compile->runtime]
@@ -74,7 +66,7 @@
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-databind;2.8.2 [compile->master]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.module#jackson-module-scala_2.11;2.8.2 [compile->default(compile)]
 [info] Resolving com.fasterxml.jackson.module#jackson-module-scala_2.11;2.8.2 ...
-[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@71891d77
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@55687e9c
 [debug] sbt-chain: module revision found in cache: com.fasterxml.jackson.module#jackson-module-scala_2.11;2.8.2
 [debug] 	found com.fasterxml.jackson.module#jackson-module-scala_2.11;2.8.2 in sbt-chain
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.module#jackson-module-scala_2.11;2.8.2 [compile->runtime]
@@ -82,7 +74,7 @@
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.module#jackson-module-scala_2.11;2.8.2 [compile->master]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.scala-lang#scala-reflect;2.11.8 [compile->default(compile)]
 [info] Resolving org.scala-lang#scala-reflect;2.11.8 ...
-[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@d4937dd
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@5f406b23
 [debug] sbt-chain: module revision found in cache: org.scala-lang#scala-reflect;2.11.8
 [debug] 	found org.scala-lang#scala-reflect;2.11.8 in sbt-chain
 [debug] 	[2.11.8] org.scala-lang#scala-reflect;2.11.8
@@ -91,7 +83,7 @@
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.scala-lang#scala-reflect;2.11.8 [compile->master]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-annotations;2.8.2 [compile->default(compile)]
 [info] Resolving com.fasterxml.jackson.core#jackson-annotations;2.8.2 ...
-[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@333be507
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@4769b57d
 [debug] sbt-chain: module revision found in cache: com.fasterxml.jackson.core#jackson-annotations;2.8.2
 [debug] 	found com.fasterxml.jackson.core#jackson-annotations;2.8.2 in sbt-chain
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-annotations;2.8.2 [compile->runtime]
@@ -99,7 +91,7 @@
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-annotations;2.8.2 [compile->master]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.module#jackson-module-paranamer;2.8.2 [compile->default(compile)]
 [info] Resolving com.fasterxml.jackson.module#jackson-module-paranamer;2.8.2 ...
-[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@444cdd9d
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@58e9f426
 [debug] sbt-chain: module revision found in cache: com.fasterxml.jackson.module#jackson-module-paranamer;2.8.2
 [debug] 	found com.fasterxml.jackson.module#jackson-module-paranamer;2.8.2 in sbt-chain
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.module#jackson-module-paranamer;2.8.2 [compile->runtime]
@@ -107,12 +99,20 @@
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.module#jackson-module-paranamer;2.8.2 [compile->master]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.thoughtworks.paranamer#paranamer;2.8 [compile->default(compile)]
 [info] Resolving com.thoughtworks.paranamer#paranamer;2.8 ...
-[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@234405cb
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@1ee44ef8
 [debug] sbt-chain: module revision found in cache: com.thoughtworks.paranamer#paranamer;2.8
 [debug] 	found com.thoughtworks.paranamer#paranamer;2.8 in sbt-chain
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.thoughtworks.paranamer#paranamer;2.8 [compile->runtime]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.thoughtworks.paranamer#paranamer;2.8 [compile->compile]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.thoughtworks.paranamer#paranamer;2.8 [compile->master]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [compile->default(compile)]
+[info] Resolving org.yaml#snakeyaml;1.17 ...
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@69009368
+[debug] sbt-chain: module revision found in cache: org.yaml#snakeyaml;1.17
+[debug] 	found org.yaml#snakeyaml;1.17 in sbt-chain
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [compile->runtime]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [compile->compile]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [compile->master]
 [debug] resolving dependencies for configuration 'runtime'
 [debug] == resolving dependencies for default#content-delivery-system-v4$sources_2.11;1.0 [runtime]
 [debug] == resolving dependencies for default#content-delivery-system-v4$sources_2.11;1.0 [compile]
@@ -140,10 +140,6 @@
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-core;2.8.2 [compile->runtime]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-core;2.8.2 [compile->compile]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-core;2.8.2 [compile->master]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [compile->default(compile)]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [compile->runtime]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [compile->compile]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [compile->master]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-databind;2.8.2 [compile->default(compile)]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-databind;2.8.2 [compile->runtime]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-databind;2.8.2 [compile->compile]
@@ -168,6 +164,10 @@
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.thoughtworks.paranamer#paranamer;2.8 [compile->runtime]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.thoughtworks.paranamer#paranamer;2.8 [compile->compile]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.thoughtworks.paranamer#paranamer;2.8 [compile->master]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [compile->default(compile)]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [compile->runtime]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [compile->compile]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [compile->master]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.scala-lang#scala-library;2.11.8 [runtime->default(compile)]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.scala-lang#scala-library;2.11.8 [runtime->runtime]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.scala-lang#scala-library;2.11.8 [runtime->compile]
@@ -192,10 +192,6 @@
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-core;2.8.2 [runtime->runtime]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-core;2.8.2 [runtime->compile]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-core;2.8.2 [runtime->master]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [runtime->default(compile)]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [runtime->runtime]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [runtime->compile]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [runtime->master]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-databind;2.8.2 [runtime->default(compile)]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-databind;2.8.2 [runtime->runtime]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-databind;2.8.2 [runtime->compile]
@@ -220,6 +216,10 @@
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.thoughtworks.paranamer#paranamer;2.8 [runtime->runtime]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.thoughtworks.paranamer#paranamer;2.8 [runtime->compile]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.thoughtworks.paranamer#paranamer;2.8 [runtime->master]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [runtime->default(compile)]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [runtime->runtime]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [runtime->compile]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [runtime->master]
 [debug] resolving dependencies for configuration 'test'
 [debug] == resolving dependencies for default#content-delivery-system-v4$sources_2.11;1.0 [test]
 [debug] == resolving dependencies for default#content-delivery-system-v4$sources_2.11;1.0 [runtime]
@@ -248,10 +248,6 @@
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-core;2.8.2 [compile->runtime]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-core;2.8.2 [compile->compile]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-core;2.8.2 [compile->master]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [compile->default(compile)]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [compile->runtime]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [compile->compile]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [compile->master]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-databind;2.8.2 [compile->default(compile)]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-databind;2.8.2 [compile->runtime]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-databind;2.8.2 [compile->compile]
@@ -276,6 +272,10 @@
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.thoughtworks.paranamer#paranamer;2.8 [compile->runtime]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.thoughtworks.paranamer#paranamer;2.8 [compile->compile]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.thoughtworks.paranamer#paranamer;2.8 [compile->master]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [compile->default(compile)]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [compile->runtime]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [compile->compile]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [compile->master]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.scala-lang#scala-library;2.11.8 [runtime->default(compile)]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.scala-lang#scala-library;2.11.8 [runtime->runtime]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.scala-lang#scala-library;2.11.8 [runtime->compile]
@@ -300,10 +300,6 @@
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-core;2.8.2 [runtime->runtime]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-core;2.8.2 [runtime->compile]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-core;2.8.2 [runtime->master]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [runtime->default(compile)]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [runtime->runtime]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [runtime->compile]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [runtime->master]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-databind;2.8.2 [runtime->default(compile)]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-databind;2.8.2 [runtime->runtime]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-databind;2.8.2 [runtime->compile]
@@ -328,6 +324,10 @@
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.thoughtworks.paranamer#paranamer;2.8 [runtime->runtime]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.thoughtworks.paranamer#paranamer;2.8 [runtime->compile]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.thoughtworks.paranamer#paranamer;2.8 [runtime->master]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [runtime->default(compile)]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [runtime->runtime]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [runtime->compile]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [runtime->master]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.scala-lang#scala-library;2.11.8 [test->default(compile)]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.scala-lang#scala-library;2.11.8 [test->runtime]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.scala-lang#scala-library;2.11.8 [test->compile]
@@ -352,10 +352,6 @@
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-core;2.8.2 [test->runtime]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-core;2.8.2 [test->compile]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-core;2.8.2 [test->master]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [test->default(compile)]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [test->runtime]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [test->compile]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [test->master]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-databind;2.8.2 [test->default(compile)]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-databind;2.8.2 [test->runtime]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-databind;2.8.2 [test->compile]
@@ -380,9 +376,13 @@
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.thoughtworks.paranamer#paranamer;2.8 [test->runtime]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.thoughtworks.paranamer#paranamer;2.8 [test->compile]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.thoughtworks.paranamer#paranamer;2.8 [test->master]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [test->default(compile)]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [test->runtime]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [test->compile]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [test->master]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.scalatest#scalatest_2.11;3.0.0 [test->default(compile)]
 [info] Resolving org.scalatest#scalatest_2.11;3.0.0 ...
-[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@4808f22e
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@7032cb2d
 [debug] sbt-chain: module revision found in cache: org.scalatest#scalatest_2.11;3.0.0
 [debug] 	found org.scalatest#scalatest_2.11;3.0.0 in sbt-chain
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.scalatest#scalatest_2.11;3.0.0 [test->runtime]
@@ -390,7 +390,7 @@
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.scalatest#scalatest_2.11;3.0.0 [test->master]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.scalactic#scalactic_2.11;3.0.0 [test->default(compile)]
 [info] Resolving org.scalactic#scalactic_2.11;3.0.0 ...
-[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@659a0cc3
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@4f6c0e0e
 [debug] sbt-chain: module revision found in cache: org.scalactic#scalactic_2.11;3.0.0
 [debug] 	found org.scalactic#scalactic_2.11;3.0.0 in sbt-chain
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.scalactic#scalactic_2.11;3.0.0 [test->runtime]
@@ -398,7 +398,7 @@
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.scalactic#scalactic_2.11;3.0.0 [test->master]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.5 [test->default(compile)]
 [info] Resolving org.scala-lang.modules#scala-xml_2.11;1.0.5 ...
-[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@2ab965de
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@4dbf27c0
 [debug] sbt-chain: module revision found in cache: org.scala-lang.modules#scala-xml_2.11;1.0.5
 [debug] 	found org.scala-lang.modules#scala-xml_2.11;1.0.5 in sbt-chain
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.5 [test->runtime]
@@ -406,7 +406,7 @@
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.5 [test->master]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4 [test->default(compile)]
 [info] Resolving org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4 ...
-[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@7d39d1b3
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@2dbe5aa5
 [debug] sbt-chain: module revision found in cache: org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4
 [debug] 	found org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4 in sbt-chain
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4 [test->runtime]
@@ -443,10 +443,6 @@
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-core;2.8.2 [compile->runtime]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-core;2.8.2 [compile->compile]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-core;2.8.2 [compile->master]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [compile->default(compile)]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [compile->runtime]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [compile->compile]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [compile->master]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-databind;2.8.2 [compile->default(compile)]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-databind;2.8.2 [compile->runtime]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-databind;2.8.2 [compile->compile]
@@ -471,6 +467,10 @@
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.thoughtworks.paranamer#paranamer;2.8 [compile->runtime]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.thoughtworks.paranamer#paranamer;2.8 [compile->compile]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.thoughtworks.paranamer#paranamer;2.8 [compile->master]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [compile->default(compile)]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [compile->runtime]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [compile->compile]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [compile->master]
 [debug] == resolving dependencies for default#content-delivery-system-v4$sources_2.11;1.0 [optional]
 [debug] == resolving dependencies for default#content-delivery-system-v4$sources_2.11;1.0 [provided]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.scala-lang#scala-library;2.11.8 [compile-internal->default(compile)]
@@ -497,10 +497,6 @@
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-core;2.8.2 [compile-internal->runtime]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-core;2.8.2 [compile-internal->compile]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-core;2.8.2 [compile-internal->master]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [compile-internal->default(compile)]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [compile-internal->runtime]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [compile-internal->compile]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [compile-internal->master]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-databind;2.8.2 [compile-internal->default(compile)]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-databind;2.8.2 [compile-internal->runtime]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-databind;2.8.2 [compile-internal->compile]
@@ -525,6 +521,10 @@
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.thoughtworks.paranamer#paranamer;2.8 [compile-internal->runtime]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.thoughtworks.paranamer#paranamer;2.8 [compile-internal->compile]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.thoughtworks.paranamer#paranamer;2.8 [compile-internal->master]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [compile-internal->default(compile)]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [compile-internal->runtime]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [compile-internal->compile]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [compile-internal->master]
 [debug] resolving dependencies for configuration 'runtime-internal'
 [debug] == resolving dependencies for default#content-delivery-system-v4$sources_2.11;1.0 [runtime-internal]
 [debug] == resolving dependencies for default#content-delivery-system-v4$sources_2.11;1.0 [runtime]
@@ -553,10 +553,6 @@
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-core;2.8.2 [compile->runtime]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-core;2.8.2 [compile->compile]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-core;2.8.2 [compile->master]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [compile->default(compile)]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [compile->runtime]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [compile->compile]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [compile->master]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-databind;2.8.2 [compile->default(compile)]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-databind;2.8.2 [compile->runtime]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-databind;2.8.2 [compile->compile]
@@ -581,6 +577,10 @@
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.thoughtworks.paranamer#paranamer;2.8 [compile->runtime]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.thoughtworks.paranamer#paranamer;2.8 [compile->compile]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.thoughtworks.paranamer#paranamer;2.8 [compile->master]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [compile->default(compile)]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [compile->runtime]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [compile->compile]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [compile->master]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.scala-lang#scala-library;2.11.8 [runtime->default(compile)]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.scala-lang#scala-library;2.11.8 [runtime->runtime]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.scala-lang#scala-library;2.11.8 [runtime->compile]
@@ -605,10 +605,6 @@
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-core;2.8.2 [runtime->runtime]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-core;2.8.2 [runtime->compile]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-core;2.8.2 [runtime->master]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [runtime->default(compile)]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [runtime->runtime]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [runtime->compile]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [runtime->master]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-databind;2.8.2 [runtime->default(compile)]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-databind;2.8.2 [runtime->runtime]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-databind;2.8.2 [runtime->compile]
@@ -633,6 +629,10 @@
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.thoughtworks.paranamer#paranamer;2.8 [runtime->runtime]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.thoughtworks.paranamer#paranamer;2.8 [runtime->compile]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.thoughtworks.paranamer#paranamer;2.8 [runtime->master]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [runtime->default(compile)]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [runtime->runtime]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [runtime->compile]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [runtime->master]
 [debug] == resolving dependencies for default#content-delivery-system-v4$sources_2.11;1.0 [optional]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.scala-lang#scala-library;2.11.8 [runtime-internal->default(compile)]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.scala-lang#scala-library;2.11.8 [runtime-internal->runtime]
@@ -658,10 +658,6 @@
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-core;2.8.2 [runtime-internal->runtime]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-core;2.8.2 [runtime-internal->compile]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-core;2.8.2 [runtime-internal->master]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [runtime-internal->default(compile)]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [runtime-internal->runtime]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [runtime-internal->compile]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [runtime-internal->master]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-databind;2.8.2 [runtime-internal->default(compile)]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-databind;2.8.2 [runtime-internal->runtime]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-databind;2.8.2 [runtime-internal->compile]
@@ -686,6 +682,10 @@
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.thoughtworks.paranamer#paranamer;2.8 [runtime-internal->runtime]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.thoughtworks.paranamer#paranamer;2.8 [runtime-internal->compile]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.thoughtworks.paranamer#paranamer;2.8 [runtime-internal->master]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [runtime-internal->default(compile)]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [runtime-internal->runtime]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [runtime-internal->compile]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [runtime-internal->master]
 [debug] resolving dependencies for configuration 'test-internal'
 [debug] == resolving dependencies for default#content-delivery-system-v4$sources_2.11;1.0 [test-internal]
 [debug] == resolving dependencies for default#content-delivery-system-v4$sources_2.11;1.0 [test]
@@ -715,10 +715,6 @@
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-core;2.8.2 [compile->runtime]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-core;2.8.2 [compile->compile]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-core;2.8.2 [compile->master]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [compile->default(compile)]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [compile->runtime]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [compile->compile]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [compile->master]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-databind;2.8.2 [compile->default(compile)]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-databind;2.8.2 [compile->runtime]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-databind;2.8.2 [compile->compile]
@@ -743,6 +739,10 @@
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.thoughtworks.paranamer#paranamer;2.8 [compile->runtime]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.thoughtworks.paranamer#paranamer;2.8 [compile->compile]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.thoughtworks.paranamer#paranamer;2.8 [compile->master]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [compile->default(compile)]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [compile->runtime]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [compile->compile]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [compile->master]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.scala-lang#scala-library;2.11.8 [runtime->default(compile)]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.scala-lang#scala-library;2.11.8 [runtime->runtime]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.scala-lang#scala-library;2.11.8 [runtime->compile]
@@ -767,10 +767,6 @@
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-core;2.8.2 [runtime->runtime]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-core;2.8.2 [runtime->compile]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-core;2.8.2 [runtime->master]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [runtime->default(compile)]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [runtime->runtime]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [runtime->compile]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [runtime->master]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-databind;2.8.2 [runtime->default(compile)]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-databind;2.8.2 [runtime->runtime]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-databind;2.8.2 [runtime->compile]
@@ -795,6 +791,10 @@
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.thoughtworks.paranamer#paranamer;2.8 [runtime->runtime]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.thoughtworks.paranamer#paranamer;2.8 [runtime->compile]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.thoughtworks.paranamer#paranamer;2.8 [runtime->master]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [runtime->default(compile)]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [runtime->runtime]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [runtime->compile]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [runtime->master]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.scala-lang#scala-library;2.11.8 [test->default(compile)]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.scala-lang#scala-library;2.11.8 [test->runtime]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.scala-lang#scala-library;2.11.8 [test->compile]
@@ -819,10 +819,6 @@
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-core;2.8.2 [test->runtime]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-core;2.8.2 [test->compile]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-core;2.8.2 [test->master]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [test->default(compile)]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [test->runtime]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [test->compile]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [test->master]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-databind;2.8.2 [test->default(compile)]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-databind;2.8.2 [test->runtime]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-databind;2.8.2 [test->compile]
@@ -847,6 +843,10 @@
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.thoughtworks.paranamer#paranamer;2.8 [test->runtime]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.thoughtworks.paranamer#paranamer;2.8 [test->compile]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.thoughtworks.paranamer#paranamer;2.8 [test->master]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [test->default(compile)]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [test->runtime]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [test->compile]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [test->master]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.scalatest#scalatest_2.11;3.0.0 [test->default(compile)]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.scalatest#scalatest_2.11;3.0.0 [test->runtime]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.scalatest#scalatest_2.11;3.0.0 [test->compile]
@@ -889,10 +889,6 @@
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-core;2.8.2 [test-internal->runtime]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-core;2.8.2 [test-internal->compile]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-core;2.8.2 [test-internal->master]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [test-internal->default(compile)]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [test-internal->runtime]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [test-internal->compile]
-[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.15 [test-internal->master]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-databind;2.8.2 [test-internal->default(compile)]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-databind;2.8.2 [test-internal->runtime]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.fasterxml.jackson.core#jackson-databind;2.8.2 [test-internal->compile]
@@ -917,6 +913,10 @@
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.thoughtworks.paranamer#paranamer;2.8 [test-internal->runtime]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.thoughtworks.paranamer#paranamer;2.8 [test-internal->compile]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->com.thoughtworks.paranamer#paranamer;2.8 [test-internal->master]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [test-internal->default(compile)]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [test-internal->runtime]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [test-internal->compile]
+[debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.yaml#snakeyaml;1.17 [test-internal->master]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.scalatest#scalatest_2.11;3.0.0 [test-internal->default(compile)]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.scalatest#scalatest_2.11;3.0.0 [test-internal->runtime]
 [debug] == resolving dependencies default#content-delivery-system-v4$sources_2.11;1.0->org.scalatest#scalatest_2.11;3.0.0 [test-internal->compile]
@@ -993,8 +993,6 @@
 [debug] 	[NOT REQUIRED] com.fasterxml.jackson.dataformat#jackson-dataformat-yaml;2.8.2!jackson-dataformat-yaml.jar(src)
 [debug] 	[NOT REQUIRED] com.fasterxml.jackson.core#jackson-core;2.8.2!jackson-core.jar(src)
 [debug] 	[NOT REQUIRED] com.fasterxml.jackson.core#jackson-core;2.8.2!jackson-core.jar
-[debug] 	[NOT REQUIRED] org.yaml#snakeyaml;1.15!snakeyaml.jar(src)
-[debug] 	[NOT REQUIRED] org.yaml#snakeyaml;1.15!snakeyaml.jar
 [debug] 	[NOT REQUIRED] com.fasterxml.jackson.core#jackson-databind;2.8.2!jackson-databind.jar(src)
 [debug] 	[NOT REQUIRED] com.fasterxml.jackson.core#jackson-databind;2.8.2!jackson-databind.jar
 [debug] 	[NOT REQUIRED] com.fasterxml.jackson.module#jackson-module-scala_2.11;2.8.2!jackson-module-scala_2.11.jar
@@ -1007,6 +1005,20 @@
 [debug] 	[NOT REQUIRED] com.fasterxml.jackson.module#jackson-module-paranamer;2.8.2!jackson-module-paranamer.jar
 [debug] 	[NOT REQUIRED] com.thoughtworks.paranamer#paranamer;2.8!paranamer.jar(src)
 [debug] 	[NOT REQUIRED] com.thoughtworks.paranamer#paranamer;2.8!paranamer.jar
+[debug] 		tried /Users/localhome/.ivy2/local/org.yaml/snakeyaml/1.17/srcs/snakeyaml-sources.jar
+[debug] 		tried /Users/localhome/.ivy2/local/org.yaml/snakeyaml/1.17/jars/snakeyaml.jar
+[debug] 		tried https://jcenter.bintray.com/org/yaml/snakeyaml/1.17/snakeyaml-1.17-sources.jar
+[info] downloading https://jcenter.bintray.com/org/yaml/snakeyaml/1.17/snakeyaml-1.17-sources.jar ...
+[debug] 	jcenter: downloading https://jcenter.bintray.com/org/yaml/snakeyaml/1.17/snakeyaml-1.17-sources.jar
+[debug] 	jcenter: downloading https://jcenter.bintray.com/org/yaml/snakeyaml/1.17/snakeyaml-1.17-sources.jar.sha1
+[debug] sha1 OK for https://jcenter.bintray.com/org/yaml/snakeyaml/1.17/snakeyaml-1.17-sources.jar
+[info] 	[SUCCESSFUL ] org.yaml#snakeyaml;1.17!snakeyaml.jar(src) (164ms)
+[debug] 		tried https://jcenter.bintray.com/org/yaml/snakeyaml/1.17/snakeyaml-1.17.jar
+[info] downloading https://jcenter.bintray.com/org/yaml/snakeyaml/1.17/snakeyaml-1.17.jar ...
+[debug] 	jcenter: downloading https://jcenter.bintray.com/org/yaml/snakeyaml/1.17/snakeyaml-1.17.jar
+[debug] 	jcenter: downloading https://jcenter.bintray.com/org/yaml/snakeyaml/1.17/snakeyaml-1.17.jar.sha1
+[debug] sha1 OK for https://jcenter.bintray.com/org/yaml/snakeyaml/1.17/snakeyaml-1.17.jar
+[info] 	[SUCCESSFUL ] org.yaml#snakeyaml;1.17!snakeyaml.jar (166ms)
 [debug] 	[NOT REQUIRED] org.scalatest#scalatest_2.11;3.0.0!scalatest_2.11.jar(src)
 [debug] 	[NOT REQUIRED] org.scalatest#scalatest_2.11;3.0.0!scalatest_2.11.jar
 [debug] 	[NOT REQUIRED] org.scalactic#scalactic_2.11;3.0.0!scalactic_2.11.jar(src)
@@ -1018,7 +1030,7 @@
 [debug] 	[NOT REQUIRED] org.scala-lang#scala-compiler;2.11.8!scala-compiler.jar(src)
 [debug] 	[NOT REQUIRED] org.scala-lang.modules#scala-xml_2.11;1.0.4!scala-xml_2.11.jar(src)
 [debug] 	[NOT REQUIRED] jline#jline;2.12.1!jline.jar(src)
-[debug] :: resolution report :: resolve 137ms :: artifacts dl 36ms
+[debug] :: resolution report :: resolve 226ms :: artifacts dl 363ms
 [debug] 	report for default#content-delivery-system-v4$sources_2.11;1.0 compile produced in /Users/localhome/workdev/content-delivery-system-v4/target/resolution-cache/reports/default-content-delivery-system-v4$sources_2.11-compile.xml
 [debug] 	report for default#content-delivery-system-v4$sources_2.11;1.0 runtime produced in /Users/localhome/workdev/content-delivery-system-v4/target/resolution-cache/reports/default-content-delivery-system-v4$sources_2.11-runtime.xml
 [debug] 	report for default#content-delivery-system-v4$sources_2.11;1.0 test produced in /Users/localhome/workdev/content-delivery-system-v4/target/resolution-cache/reports/default-content-delivery-system-v4$sources_2.11-test.xml
@@ -1032,4 +1044,4 @@
 [debug] 	report for default#content-delivery-system-v4$sources_2.11;1.0 docs produced in /Users/localhome/workdev/content-delivery-system-v4/target/resolution-cache/reports/default-content-delivery-system-v4$sources_2.11-docs.xml
 [debug] 	report for default#content-delivery-system-v4$sources_2.11;1.0 pom produced in /Users/localhome/workdev/content-delivery-system-v4/target/resolution-cache/reports/default-content-delivery-system-v4$sources_2.11-pom.xml
 [debug] 	report for default#content-delivery-system-v4$sources_2.11;1.0 scala-tool produced in /Users/localhome/workdev/content-delivery-system-v4/target/resolution-cache/reports/default-content-delivery-system-v4$sources_2.11-scala-tool.xml
-[debug] 	resolve done (137ms resolve - 36ms download)
+[debug] 	resolve done (226ms resolve - 363ms download)

@@ -7,7 +7,7 @@
 		revision="1.0"
 		conf="test-internal"
 		confs="compile, runtime, test, provided, optional, compile-internal, runtime-internal, test-internal, plugin, sources, docs, pom, scala-tool"
-		date="20161026145438"/>
+		date="20161026154609"/>
 	<dependencies>
 		<module organisation="org.scalatest" name="scalatest_2.11">
 			<revision name="3.0.0" status="release" pubdate="20160801151153" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://www.scalatest.org" downloaded="false" searched="false" default="false" conf="default, compile, runtime, default(compile), master" position="13">
@@ -69,8 +69,23 @@
 				</artifacts>
 			</revision>
 		</module>
+		<module organisation="org.yaml" name="snakeyaml">
+			<revision name="1.17" status="release" pubdate="20160219133754" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://www.snakeyaml.org" downloaded="false" searched="false" default="false" conf="default, compile, runtime, default(compile), master" position="12">
+				<license name="Apache License, Version 2.0" url="http://www.apache.org/licenses/LICENSE-2.0.txt"/>
+				<metadata-artifact status="no" details="" size="3830" time="0" location="/Users/localhome/.ivy2/cache/org.yaml/snakeyaml/ivy-1.17.xml" searched="false" origin-is-local="false" origin-location="https://jcenter.bintray.com/org/yaml/snakeyaml/1.17/snakeyaml-1.17.pom"/>
+				<caller organisation="default" name="content-delivery-system-v4$sources_2.11" conf="test, compile, provided, test-internal, runtime, optional" rev="1.17" rev-constraint-default="1.17" rev-constraint-dynamic="1.17" callerrev="1.0"/>
+				<artifacts>
+					<artifact name="snakeyaml" type="src" ext="jar" extra-classifier="sources" status="successful" details="" size="171312" time="164" location="/Users/localhome/.ivy2/cache/org.yaml/snakeyaml/srcs/snakeyaml-1.17-sources.jar">
+						<origin-location is-local="false" location="https://jcenter.bintray.com/org/yaml/snakeyaml/1.17/snakeyaml-1.17-sources.jar"/>
+					</artifact>
+					<artifact name="snakeyaml" type="jar" ext="jar" status="successful" details="" size="273599" time="166" location="/Users/localhome/.ivy2/cache/org.yaml/snakeyaml/jars/snakeyaml-1.17.jar">
+						<origin-location is-local="false" location="https://jcenter.bintray.com/org/yaml/snakeyaml/1.17/snakeyaml-1.17.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+		</module>
 		<module organisation="com.fasterxml.jackson.module" name="jackson-module-scala_2.11">
-			<revision name="2.8.2" status="release" pubdate="20160830163555" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://wiki.fasterxml.com/JacksonModuleScala" downloaded="false" searched="false" default="false" conf="default, compile, runtime, default(compile), master" position="8">
+			<revision name="2.8.2" status="release" pubdate="20160830163555" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://wiki.fasterxml.com/JacksonModuleScala" downloaded="false" searched="false" default="false" conf="default, compile, runtime, default(compile), master" position="7">
 				<license name="The Apache Software License, Version 2.0" url="http://www.apache.org/licenses/LICENSE-2.0.txt"/>
 				<metadata-artifact status="no" details="" size="4217" time="0" location="/Users/localhome/.ivy2/cache/com.fasterxml.jackson.module/jackson-module-scala_2.11/ivy-2.8.2.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/com/fasterxml/jackson/module/jackson-module-scala_2.11/2.8.2/jackson-module-scala_2.11-2.8.2.pom"/>
 				<caller organisation="default" name="content-delivery-system-v4$sources_2.11" conf="test, compile, provided, test-internal, runtime, optional" rev="2.8.2" rev-constraint-default="2.8.2" rev-constraint-dynamic="2.8.2" callerrev="1.0"/>
@@ -85,7 +100,7 @@
 			</revision>
 		</module>
 		<module organisation="com.fasterxml.jackson.module" name="jackson-module-paranamer">
-			<revision name="2.8.2" status="release" pubdate="20160830045511" resolver="sbt-chain" artresolver="sbt-chain" homepage="https://github.com/FasterXML/jackson-modules-base" downloaded="false" searched="false" default="false" conf="default, compile, runtime, default(compile), master" position="11">
+			<revision name="2.8.2" status="release" pubdate="20160830045511" resolver="sbt-chain" artresolver="sbt-chain" homepage="https://github.com/FasterXML/jackson-modules-base" downloaded="false" searched="false" default="false" conf="default, compile, runtime, default(compile), master" position="10">
 				<license name="The Apache Software License, Version 2.0" url="http://www.apache.org/licenses/LICENSE-2.0.txt"/>
 				<metadata-artifact status="no" details="" size="9636" time="0" location="/Users/localhome/.ivy2/cache/com.fasterxml.jackson.module/jackson-module-paranamer/ivy-2.8.2.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/com/fasterxml/jackson/module/jackson-module-paranamer/2.8.2/jackson-module-paranamer-2.8.2.pom"/>
 				<caller organisation="default" name="content-delivery-system-v4$sources_2.11" conf="test, compile, provided, test-internal, runtime, optional" rev="2.8.2" rev-constraint-default="2.8.2" rev-constraint-dynamic="2.8.2" callerrev="1.0"/>
@@ -100,7 +115,7 @@
 			</revision>
 		</module>
 		<module organisation="com.thoughtworks.paranamer" name="paranamer">
-			<revision name="2.8" status="release" pubdate="20150826122928" resolver="sbt-chain" artresolver="sbt-chain" homepage="" downloaded="false" searched="false" default="false" conf="default, compile, runtime, default(compile), master" position="12">
+			<revision name="2.8" status="release" pubdate="20150826122928" resolver="sbt-chain" artresolver="sbt-chain" homepage="" downloaded="false" searched="false" default="false" conf="default, compile, runtime, default(compile), master" position="11">
 				<metadata-artifact status="no" details="" size="4211" time="0" location="/Users/localhome/.ivy2/cache/com.thoughtworks.paranamer/paranamer/ivy-2.8.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/com/thoughtworks/paranamer/paranamer/2.8/paranamer-2.8.pom"/>
 				<caller organisation="default" name="content-delivery-system-v4$sources_2.11" conf="test, compile, provided, test-internal, runtime, optional" rev="2.8" rev-constraint-default="2.8" rev-constraint-dynamic="2.8" callerrev="1.0"/>
 				<artifacts>
@@ -114,7 +129,7 @@
 			</revision>
 		</module>
 		<module organisation="com.fasterxml.jackson.core" name="jackson-annotations">
-			<revision name="2.8.2" status="release" pubdate="20160830013619" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://github.com/FasterXML/jackson" downloaded="false" searched="false" default="false" conf="default, compile, runtime, default(compile), master" position="10">
+			<revision name="2.8.2" status="release" pubdate="20160830013619" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://github.com/FasterXML/jackson" downloaded="false" searched="false" default="false" conf="default, compile, runtime, default(compile), master" position="9">
 				<license name="The Apache Software License, Version 2.0" url="http://www.apache.org/licenses/LICENSE-2.0.txt"/>
 				<metadata-artifact status="no" details="" size="6969" time="0" location="/Users/localhome/.ivy2/cache/com.fasterxml.jackson.core/jackson-annotations/ivy-2.8.2.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.8.2/jackson-annotations-2.8.2.pom"/>
 				<caller organisation="default" name="content-delivery-system-v4$sources_2.11" conf="test, compile, provided, test-internal, runtime, optional" rev="2.8.2" rev-constraint-default="2.8.2" rev-constraint-dynamic="2.8.2" callerrev="1.0"/>
@@ -129,7 +144,7 @@
 			</revision>
 		</module>
 		<module organisation="org.scala-lang" name="scala-reflect">
-			<revision name="2.11.8" status="release" pubdate="20160304152641" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://www.scala-lang.org/" extra-info.apiURL="http://www.scala-lang.org/api/2.11.8/" downloaded="false" searched="false" default="false" conf="default, compile, runtime, default(compile), master" position="9">
+			<revision name="2.11.8" status="release" pubdate="20160304152641" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://www.scala-lang.org/" extra-info.apiURL="http://www.scala-lang.org/api/2.11.8/" downloaded="false" searched="false" default="false" conf="default, compile, runtime, default(compile), master" position="8">
 				<license name="BSD 3-Clause" url="http://www.scala-lang.org/license.html"/>
 				<metadata-artifact status="no" details="" size="2825" time="0" location="/Users/localhome/.ivy2/cache/org.scala-lang/scala-reflect/ivy-2.11.8.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.11.8/scala-reflect-2.11.8.pom"/>
 				<caller organisation="default" name="content-delivery-system-v4$sources_2.11" conf="test, compile, provided, test-internal, runtime, optional" rev="2.11.8" rev-constraint-default="2.11.8" rev-constraint-dynamic="2.11.8" callerrev="1.0" extra-info.apiURL="http://www.scala-lang.org/api/2.11.8/"/>
@@ -158,23 +173,8 @@
 				</artifacts>
 			</revision>
 		</module>
-		<module organisation="org.yaml" name="snakeyaml">
-			<revision name="1.15" status="release" pubdate="20150219132710" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://www.snakeyaml.org" downloaded="false" searched="false" default="false" conf="default, compile, runtime, default(compile), master" position="6">
-				<license name="Apache License Version 2.0" url="LICENSE.txt"/>
-				<metadata-artifact status="no" details="" size="3591" time="0" location="/Users/localhome/.ivy2/cache/org.yaml/snakeyaml/ivy-1.15.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/yaml/snakeyaml/1.15/snakeyaml-1.15.pom"/>
-				<caller organisation="default" name="content-delivery-system-v4$sources_2.11" conf="test, compile, provided, test-internal, runtime, optional" rev="1.15" rev-constraint-default="1.15" rev-constraint-dynamic="1.15" callerrev="1.0"/>
-				<artifacts>
-					<artifact name="snakeyaml" type="src" ext="jar" extra-classifier="sources" status="no" details="" size="169119" time="0" location="/Users/localhome/.ivy2/cache/org.yaml/snakeyaml/srcs/snakeyaml-1.15-sources.jar">
-						<origin-location is-local="false" location="https://jcenter.bintray.com/org/yaml/snakeyaml/1.15/snakeyaml-1.15-sources.jar"/>
-					</artifact>
-					<artifact name="snakeyaml" type="jar" ext="jar" status="no" details="" size="269295" time="0" location="/Users/localhome/.ivy2/cache/org.yaml/snakeyaml/jars/snakeyaml-1.15.jar">
-						<origin-location is-local="false" location="https://jcenter.bintray.com/org/yaml/snakeyaml/1.15/snakeyaml-1.15.jar"/>
-					</artifact>
-				</artifacts>
-			</revision>
-		</module>
 		<module organisation="com.fasterxml.jackson.core" name="jackson-databind">
-			<revision name="2.8.2" status="release" pubdate="20160830014444" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://github.com/FasterXML/jackson" downloaded="false" searched="false" default="false" conf="default, compile, runtime, default(compile), master" position="7">
+			<revision name="2.8.2" status="release" pubdate="20160830014444" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://github.com/FasterXML/jackson" downloaded="false" searched="false" default="false" conf="default, compile, runtime, default(compile), master" position="6">
 				<license name="The Apache Software License, Version 2.0" url="http://www.apache.org/licenses/LICENSE-2.0.txt"/>
 				<metadata-artifact status="no" details="" size="8156" time="0" location="/Users/localhome/.ivy2/cache/com.fasterxml.jackson.core/jackson-databind/ivy-2.8.2.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.8.2/jackson-databind-2.8.2.pom"/>
 				<caller organisation="default" name="content-delivery-system-v4$sources_2.11" conf="test, compile, provided, test-internal, runtime, optional" rev="2.8.2" rev-constraint-default="2.8.2" rev-constraint-dynamic="2.8.2" callerrev="1.0"/>

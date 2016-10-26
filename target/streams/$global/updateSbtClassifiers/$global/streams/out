@@ -15,6 +15,7 @@
 [debug] == resolving dependencies org.scala-sbt#sbt;0.13.8->org.scala-lang#scala-library;2.10.4 [compile->default(compile)]
 [info] Resolving org.scala-lang#scala-library;2.10.4 ...
 [debug] sbt-chain: Checking cache for: dependency: org.scala-lang#scala-library;2.10.4 {compile=[default(compile)]}
+[debug] no default cache defined: set to /Users/localhome/.ivy2/cache
 [debug] sbt-chain: module revision found in cache: org.scala-lang#scala-library;2.10.4
 [debug] 	found org.scala-lang#scala-library;2.10.4 in sbt-chain
 [debug] 	[2.10.4] org.scala-lang#scala-library;2.10.4
@@ -703,9 +704,9 @@
 [debug] 	[NOT REQUIRED] org.scala-sbt#test-agent;0.13.8!test-agent.jar
 [debug] 	[NOT REQUIRED] org.scala-sbt#test-interface;1.0!test-interface.jar
 [debug] 	[NOT REQUIRED] org.scala-sbt#apply-macro;0.13.8!apply-macro.jar
-[debug] :: resolution report :: resolve 359ms :: artifacts dl 24ms
+[debug] :: resolution report :: resolve 323ms :: artifacts dl 16ms
 [debug] 	report for default#content-delivery-system-v4$sbt_2.11;1.0 default produced in /Users/localhome/workdev/content-delivery-system-v4/target/resolution-cache/reports/default-content-delivery-system-v4$sbt_2.11-default.xml
-[debug] 	resolve done (359ms resolve - 24ms download)
+[debug] 	resolve done (323ms resolve - 16ms download)
 [debug] Using inline dependencies specified in Scala.
 [debug] :: resolving dependencies :: default#content-delivery-system-v4$sources_2.11;1.0
 [debug] 	confs: [default]
@@ -1069,6 +1070,6 @@
 [debug] 	[NOT REQUIRED] org.scala-sbt#precompiled-2_8_2;0.13.8!precompiled-2_8_2.jar(src)
 [debug] 	[NOT REQUIRED] org.scala-sbt#precompiled-2_9_2;0.13.8!precompiled-2_9_2.jar(src)
 [debug] 	[NOT REQUIRED] org.scala-sbt#precompiled-2_9_3;0.13.8!precompiled-2_9_3.jar(src)
-[debug] :: resolution report :: resolve 75ms :: artifacts dl 16ms
+[debug] :: resolution report :: resolve 96ms :: artifacts dl 14ms
 [debug] 	report for default#content-delivery-system-v4$sources_2.11;1.0 default produced in /Users/localhome/workdev/content-delivery-system-v4/target/resolution-cache/reports/default-content-delivery-system-v4$sources_2.11-default.xml
-[debug] 	resolve done (75ms resolve - 16ms download)
+[debug] 	resolve done (96ms resolve - 14ms download)

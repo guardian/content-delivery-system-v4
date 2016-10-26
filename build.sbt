@@ -18,3 +18,4 @@ libraryDependencies += "com.fasterxml.jackson.core" % "jackson-databind" % "2.8.
 
 libraryDependencies += "com.fasterxml.jackson.module" % "jackson-module-scala_2.11" % "2.8.2"
 
+libraryDependencies += "org.yaml" % "snakeyaml" % "1.17"

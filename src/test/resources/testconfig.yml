@@ -1,0 +1,4 @@
+loggers:
+  - name: FirstLogger
+    enabled: "true"
+    Param1: val1
