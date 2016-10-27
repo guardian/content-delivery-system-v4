@@ -1,6 +1,6 @@
 package logging
 
-import CDS.CDSMethod
+import CDS.{CDSMethod, CDSRoute}
 
 import scala.collection.mutable.SynchronizedQueue
 import java.util.concurrent.ConcurrentLinkedQueue
@@ -12,8 +12,8 @@ import config.LoggerConfig
   */
 
 object LogCollection {
-  def fromConfig(loggerInfo:Set[LoggerConfig]) = {
-    val optionInstances = loggerInfo.filter(x=>x.enabled).map(x=>x.makeInstance)
+  def fromConfig(loggerInfo:Set[LoggerConfig],routeName:String,routeType:String) = {
+    val optionInstances = loggerInfo.filter(x=>x.enabled).map(x=>x.makeInstance(routeName,routeType))
 
     val validInstances = optionInstances.filter(x=>x match {
                                                   case Some(logger)=>true
@@ -53,6 +53,11 @@ case class LogCollection(activeLoggers:Seq[Logger]) {
   def debug(msg:String,curMethod:CDSMethod) = relayMessage(msg,curMethod,"debug")
   def error(msg:String,curMethod:CDSMethod) = relayMessage(msg,curMethod,"error")
   def warn(msg:String,curMethod:CDSMethod) = relayMessage(msg,curMethod,"warn")
+
+  def methodStarting(newMethod: CDSMethod): Unit =
+    activeLoggers.foreach(x=>x.methodStarting(newMethod))
+  def methodFinished(method: CDSMethod, success: Boolean, nonfatal: Boolean): Unit =
+    activeLoggers.foreach(x=>x.methodFinished(method,success,nonfatal))
 
   def teardown = activeLoggers.foreach(x=>x.teardown)
 }

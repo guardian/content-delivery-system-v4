@@ -1,5 +1,6 @@
 package config
 
+import CDS.CDSRoute
 import logging.LogCollection
 import org.yaml.snakeyaml.Yaml
 
@@ -40,8 +41,8 @@ object CDSConfig {
 }
 
 case class CDSConfig(loggers:Set[LoggerConfig]) {
-  def getLogCollection:LogCollection = {
-    LogCollection.fromConfig(loggers)
+  def getLogCollection(routeName:String,routeType:String):LogCollection = {
+    LogCollection.fromConfig(loggers,routeName,routeType)
   }
   def dump = {
     println("Logger config:")

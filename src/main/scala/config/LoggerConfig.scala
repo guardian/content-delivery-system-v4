@@ -1,6 +1,9 @@
 package config
 import logging.Logger
 import java.lang.ClassNotFoundException
+
+import CDS.CDSRoute
+
 import scala.collection.JavaConversions._
 
 /**
@@ -29,11 +32,13 @@ case class LoggerConfig(name: String, enabled: Boolean, params: Map[String,Strin
     println("\tOther parameters: " + params)
   }
 
-  def makeInstance:Option[Logger] = {
+  def makeInstance(routeName:String,routeType:String):Option[Logger] = {
     println("INFO: Attempting to initialise logger " + name)
-    try
-      Some(Class.forName(name).newInstance().asInstanceOf[Logger])
-    catch {
+    try {
+      val cstrct = Class.forName(name).getConstructors
+
+      Some(cstrct(0).newInstance(params,routeName,routeType).asInstanceOf[Logger].init(params))
+    } catch {
       case e:ClassNotFoundException=>
         println("-ERROR: Logger " + name + " could not be loaded (class not found).  Please check your config file.")
         None
