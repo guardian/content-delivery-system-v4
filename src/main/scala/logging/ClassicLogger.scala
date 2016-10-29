@@ -13,9 +13,6 @@ class ClassicLogger(params: Map[String, String],routeName:String,routeType:Strin
   new File(logdir).mkdirs()
   val printwriter = new PrintWriter(new File(logdir + filename))
 
-  override def init(params: Map[String, String]): Logger = {
-    this
-  }
 
   override def methodStarting(newMethod: CDSMethod): Unit = Future {
     printwriter.write("---------------------------------------------------------")
@@ -25,9 +22,11 @@ class ClassicLogger(params: Map[String, String],routeName:String,routeType:Strin
   override def methodFinished(method: CDSMethod, success: Boolean, nonfatal: Boolean): Unit = Future {
     success match {
       case true=>printwriter.write("CDS: " + method.methodType + " " + method.name + " returned successfully")
-      case false=>printwriter.write("CDS: " + method.methodType + " " + method.name + " FAILED")
+      case false=>
+        printwriter.write("CDS: " + method.methodType + " " + method.name + " FAILED")
+        if(! nonfatal) printwriter.write("<nonfatal/> is set, so continuing.")
     }
-    if(! nonfatal) printwriter.write("<nonfatal/> is set, so continuing.")
+
   }
 
   override def relayMessage(msg: String, curMethod: CDSMethod, severity: String): Unit =

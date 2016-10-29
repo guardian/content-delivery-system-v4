@@ -7,3 +7,5 @@ loggers:
     basepath: /var/log/cds_backend
   - name: logging.invalidLoggerName
     enabled: "true"
+datastore:
+  class: datastore.SqliteBackedDatastore
