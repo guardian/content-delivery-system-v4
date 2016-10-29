@@ -1,12 +1,7 @@
 package datastore
 import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
-
-import java.sql.Connection
-import java.sql.DriverManager
-import java.sql.ResultSet
-import java.sql.SQLException
-import java.sql.Statement
+import java.sql._
 
 /*https://bitbucket.org/xerial/sqlite-jdbc*/
 
@@ -15,9 +10,10 @@ import java.sql.Statement
   */
 class SqliteBackedDatastore(params:Map[String,String]) extends Datastore {
   val databasePath = params("databasepath") + "/" + params("routename") + ".db"
-  val db = DriverManager.getConnection(s"jdbc:sqlite:$databasePath")
+ // val db = DriverManager.getConnection(s"jdbc:sqlite:$databasePath")
 
   override def createNewDatastore(params: Map[String, String]) = Future {
+    val db = DriverManager.getConnection(s"jdbc:sqlite:$databasePath")
     val st = db.createStatement()
     st.setQueryTimeout(30)
 
@@ -28,21 +24,99 @@ class SqliteBackedDatastore(params:Map[String,String]) extends Datastore {
       st.executeUpdate("CREATE TABLE tracks (id integer primary key autoincrement,source_id,track_index,key,value)")
       st.executeUpdate("CREATE TABLE media (id integer primary key autoincrement,source_id,key,value)")
       st.executeUpdate("INSERT INTO system (schema_version,cds_version) VALUES (1.0,4.0)")
+      db.close()
       true
     } catch {
       case e:SQLException=>
         println("Unable to set up datastore: " +e)
+        db.close()
         false
     }
   }
 
-  override def close(): Unit = db.close()
+  override def close(): Unit = {}
 
-  override def setMulti(section: String, params: Map[String, String]): Future[List[Boolean]] = Future {
-    List()
+  def getSourceIdSync(whoami:String,mytype:String):Integer = {
+    val db = DriverManager.getConnection(s"jdbc:sqlite:$databasePath")
+      val st = db.prepareStatement("select id from sources where provider_method=?")
+      st.setString(1,whoami)
+      val resultSet = st.executeQuery()
+      resultSet.next match {
+        case false=>
+          val insertst = db.prepareStatement("INSERT INTO sources (type,provider_method,ctime) values (?,?,?)")
+          insertst.setString(1,mytype)
+          insertst.setString(2,whoami)
+          insertst.setString(3,new java.util.Date().toString)
+          insertst.executeUpdate()
+
+          val newGetSt = db.createStatement()
+          val newResultSet = newGetSt.executeQuery("SELECT last_insert_rowid()")
+          val r=newResultSet.getInt(1)
+          db.close()
+          r
+        case true=>
+          val r=resultSet.getInt(1)
+          db.close()
+          r
+      }
   }
 
+  override def setMulti(section: String, params: Map[String, String], whoami:String): Future[List[Boolean]] = Future {
+    val db = DriverManager.getConnection(s"jdbc:sqlite:$databasePath")
+    db.setAutoCommit(false)
+    val sourceId = getSourceIdSync(whoami,"cds")
+    println(s"sourceId is $sourceId")
+    println(s"params are $params")
+
+    val maybeSt:Option[PreparedStatement] = section match {
+      case "meta" | "media" | "track" =>
+        Some(db.prepareStatement(s"INSERT into $section (source_id,key,value) VALUES (?,?,?)"))
+      case _=>
+        println(s"$section is not a valid datastore section")
+        None
+    }
+
+    maybeSt match {
+      case Some(st) =>
+        val r = params.map(kvtuple =>
+          try {
+            st.setInt(1, sourceId)
+            st.setString(2, kvtuple._1)
+            st.setString(3, kvtuple._2)
+            val r = st.executeUpdate()
+            if (r == 1) {
+              true
+            } else {
+              false
+            }
+          } catch {
+            case e: SQLException =>
+              println("-ERROR: " + e)
+              false
+          }
+        ).toList
+        db.commit()
+        db.close()
+        r
+      case None =>
+        db.close()
+        List()
+    }
+  }
+
+
   override def getMulti(section: String, keys: List[String]): Future[Map[String, String]] = Future {
-    Map()
+    val db = DriverManager.getConnection(s"jdbc:sqlite:$databasePath")
+
+    val st = db.prepareStatement("SELECT value from meta where key=?")
+
+    keys.map(k=>
+      try{
+        st.setString(1,k)
+        val r=st.executeQuery()
+        (k,r.getString(1))
+      }
+    ).toMap[String,String]
+
   }
 }

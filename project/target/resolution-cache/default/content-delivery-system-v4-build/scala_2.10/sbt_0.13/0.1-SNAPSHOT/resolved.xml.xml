@@ -4,7 +4,7 @@
 		module="content-delivery-system-v4-build"
 		revision="0.1-SNAPSHOT"
 		status="integration"
-		publication="20161027152751"
+		publication="20161027202004"
 		e:sbtVersion="0.13" e:scalaVersion="2.10"
 	>
 		<description>
