@@ -42,18 +42,12 @@ trait Datastore {
       val identifier = string.substring(start,end+1)
 
       println(s"identifier is $identifier")
-//      val parts = identifier.split(":").map(_.trim)
 
       val to_sub = identifier match {
         case r"\{(\w+)$section:(\w+)${key}\}$$"=>get(section,key)
         case r"^\{(.+)${key}\}$$"=>get("core",key)
         case _=>Future("(invalid substitution)")
       }
-//      val to_sub = if(parts.length==1){
-//        get("core",parts.head)
-//      } else {
-//        get(parts.head,parts(1))
-//      }
 
       //return an updated version of the input Futures list, including a new one for this substitution
       val newfutures = futures :+ to_sub.map(x=>(identifier,x))
