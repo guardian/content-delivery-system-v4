@@ -110,10 +110,12 @@ class SqliteBackedDatastore(params:Map[String,String]) extends Datastore {
 
     val st = db.prepareStatement("SELECT value from meta where key=?")
 
+    println(s"looking up $keys")
     keys.map(k=>
       try{
         st.setString(1,k)
         val r=st.executeQuery()
+        println(s"got ${r.getString(1)} for $k")
         (k,r.getString(1))
       }
     ).toMap[String,String]
