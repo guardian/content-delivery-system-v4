@@ -43,7 +43,7 @@ object CDSRoute {
   def readRoute(x: Node,config:CDSConfig):CDSRoute = {
     val logCollection = config.getLogCollection(getMethodName(x),getMethodAttrib(x,"type"))
     val methodList:Seq[CDSMethod] = x.nonEmptyChildren.
-      filter(z=>{!z.isAtom}).
+      filter(!_.isAtom).
       map(y =>{
         CDSMethod(y.label,getMethodName(y),getFileRequirements(y),getMethodParams(y),logCollection)
       })
