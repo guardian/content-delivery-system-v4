@@ -59,11 +59,9 @@ object CDSRoute {
 
   def fromFile(filename:String) = {
     val src = Source.fromFile(filename,"utf8")
-    val parser = new ConstructingParser(src,true)
-    parser.initialize
-    val doc = parser.document()
+    val parser = ConstructingParser.fromSource(src,true)
 
-    readRoute(doc.children.head)
+    readRoute(parser.document().docElem)
   }
 }
 
