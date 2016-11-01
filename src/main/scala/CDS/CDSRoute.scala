@@ -17,10 +17,15 @@ object CDSRoute {
   }
 
   def getMethodParams(n:Node):Map[String,String] =
-    (n.child.collect {
+  /*
+  collect allows us to run a different mapping function depending on the data type incoming
+  here we iterate all child nodes, but only take the ones that are Elements (Elem) (thus filtering out #PCDATA)
+  and map it to a list of tuples label->text.  we then convert this to a String-String map.
+   */
+    n.child.collect {
       case e: Elem if e.label != "take-files" =>
         e.label -> e.text
-    }).toMap
+    }.toMap
 
   def getMethodAttrib(n:Node,attName:String):Option[String] =
     n \@ attName match {
@@ -33,6 +38,12 @@ object CDSRoute {
   }
 
   def readRoute(x: Node):CDSRoute = {
+    /*
+    this call is effectively a filter chain
+    the first line in the block after for is what to iterate on
+    each following line is a filter if it starts with "if" or a map otherwise
+    then the yield is evaluated for the output of the filter chain.
+     */
     val methodList = for {
       child <- x.nonEmptyChildren
       if !child.isAtom
