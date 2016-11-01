@@ -22,22 +22,27 @@ object CDSRoute {
         e.label -> e.text
     }).toMap
 
-  def getMethodAttrib(n:Node,attName:String):String =
+  def getMethodAttrib(n:Node,attName:String):Option[String] =
     n \@ attName match {
-      case "" => "(noname)"
-      case attr => attr
+      case "" => None
+      case attr => Some(attr)
     }
 
   def getMethodName(n:Node):String = {
-    getMethodAttrib(n,"name")
+    getMethodAttrib(n,"name").getOrElse("(no name)")
   }
 
   def readRoute(x: Node):CDSRoute = {
     val methodList = for {
       child <- x.nonEmptyChildren
       if !child.isAtom
-    } yield CDSMethod(child.label,getMethodName(child),getFileRequirements(child),getMethodParams(child))
-    CDSRoute(getMethodName(x),getMethodAttrib(x,"type"),methodList)
+    } yield CDSMethod(
+      child.label,getMethodName(child),getFileRequirements(child),getMethodParams(child)
+    )
+
+    CDSRoute(getMethodAttrib(x,"name").getOrElse("(no name)"),
+      getMethodAttrib(x,"type").get,
+      methodList)
   }
 
   def fromFile(filename:String) = {
