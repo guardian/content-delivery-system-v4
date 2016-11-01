@@ -33,11 +33,10 @@ object CDSRoute {
   }
 
   def readRoute(x: Node):CDSRoute = {
-    val methodList:Seq[CDSMethod] = x.nonEmptyChildren.
-      filter(z=>{!z.isAtom}).
-      map(y =>{
-        CDSMethod(y.label,getMethodName(y),getFileRequirements(y),getMethodParams(y))
-      })
+    val methodList = for {
+      child <- x.nonEmptyChildren
+      if !child.isAtom
+    } yield CDSMethod(child.label,getMethodName(child),getFileRequirements(child),getMethodParams(child))
     CDSRoute(getMethodName(x),getMethodAttrib(x,"type"),methodList)
   }
 
