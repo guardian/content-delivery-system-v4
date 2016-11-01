@@ -3,7 +3,7 @@ package CDS
 import logging.LogCollection
 
 import scala.io.Source
-import scala.xml.Node
+import scala.xml.{Elem, Node}
 import scala.xml.parsing.ConstructingParser
 
 /**
@@ -16,54 +16,40 @@ object CDSRoute {
     takeFilesContent.split("\\|")
   }
 
-  def getMethodParams(n:Node):Map[String,String] = {
-//    Map(n.child.filter(
-//      x=>{
-//        x.label match {
-//          case "#PCDATA"=>false
-//          case "take-files"=>false
-//          case _=>true
-//        }
-//      }
-//    ).map (x=>{x.label->x.text}): _*)
-    n.child.filter(
-      x=>{
-        x.label match {
-          case "#PCDATA"=>false
-          case "take-files"=>false
-          case _=>true
-        }
-      }
-    ).map (x=>{x.label->x.text}).toMap
-  }
+  def getMethodParams(n:Node):Map[String,String] =
+    (n.child.collect {
+      case e: Elem if e.label != "take-files" =>
+        e.label -> e.text
+    }).toMap
 
-  def getMethodAttrib(n:Node,attName:String):String = {
-    n.attribute(attName) match {
-      case Some(nodeseq) => nodeseq.head.text
-      case _ => "(noname)"
+  def getMethodAttrib(n:Node,attName:String):Option[String] =
+    n \@ attName match {
+      case "" => None
+      case attr => Some(attr)
     }
-  }
 
   def getMethodName(n:Node):String = {
-    getMethodAttrib(n,"name")
+    getMethodAttrib(n,"name").getOrElse("(no name)")
   }
 
   def readRoute(x: Node):CDSRoute = {
-    val methodList:Seq[CDSMethod] = x.nonEmptyChildren.
-      filter(z=>{!z.isAtom}).
-      map(y =>{
-        CDSMethod(y.label,getMethodName(y),getFileRequirements(y),getMethodParams(y))
-      })
-    CDSRoute(getMethodName(x),getMethodAttrib(x,"type"),methodList)
+    val methodList = for {
+      child <- x.nonEmptyChildren
+      if !child.isAtom
+    } yield CDSMethod(
+      child.label,getMethodName(child),getFileRequirements(child),getMethodParams(child)
+    )
+
+    CDSRoute(getMethodAttrib(x,"name").getOrElse("(no name)"),
+      getMethodAttrib(x,"type").get,
+      methodList)
   }
 
   def fromFile(filename:String) = {
     val src = Source.fromFile(filename,"utf8")
-    val parser = new ConstructingParser(src,true)
-    parser.initialize
-    val doc = parser.document()
+    val parser = ConstructingParser.fromSource(src,true)
 
-    readRoute(doc.children.head)
+    readRoute(parser.document().docElem)
   }
 }
 
