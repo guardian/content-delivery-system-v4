@@ -37,12 +37,11 @@ object CDSRoute {
     ).map (x=>{x.label->x.text}).toMap
   }
 
-  def getMethodAttrib(n:Node,attName:String):String = {
-    n.attribute(attName) match {
-      case Some(nodeseq) => nodeseq.head.text
-      case _ => "(noname)"
+  def getMethodAttrib(n:Node,attName:String):String =
+    n \@ attName match {
+      case "" => "(noname)"
+      case attr => attr
     }
-  }
 
   def getMethodName(n:Node):String = {
     getMethodAttrib(n,"name")
