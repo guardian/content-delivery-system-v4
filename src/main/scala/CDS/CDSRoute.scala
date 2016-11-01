@@ -3,7 +3,7 @@ package CDS
 import logging.LogCollection
 
 import scala.io.Source
-import scala.xml.Node
+import scala.xml.{Elem, Node}
 import scala.xml.parsing.ConstructingParser
 
 /**
@@ -16,26 +16,11 @@ object CDSRoute {
     takeFilesContent.split("\\|")
   }
 
-  def getMethodParams(n:Node):Map[String,String] = {
-//    Map(n.child.filter(
-//      x=>{
-//        x.label match {
-//          case "#PCDATA"=>false
-//          case "take-files"=>false
-//          case _=>true
-//        }
-//      }
-//    ).map (x=>{x.label->x.text}): _*)
-    n.child.filter(
-      x=>{
-        x.label match {
-          case "#PCDATA"=>false
-          case "take-files"=>false
-          case _=>true
-        }
-      }
-    ).map (x=>{x.label->x.text}).toMap
-  }
+  def getMethodParams(n:Node):Map[String,String] =
+    (n.child.collect {
+      case e: Elem if e.label != "take-files" =>
+        e.label -> e.text
+    }).toMap
 
   def getMethodAttrib(n:Node,attName:String):String =
     n \@ attName match {
