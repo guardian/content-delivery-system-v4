@@ -17,6 +17,8 @@ dependencies:
   cache_directories:
     - "~/.sbt"
   override:
+    - sudo mkdir -p /var/log/cds_backend
+    - sudo chown ubuntu /var/log/cds_backend
     - sbt test:compile
 
 test:
