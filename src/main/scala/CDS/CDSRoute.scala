@@ -1,6 +1,7 @@
 package CDS
 
 import logging.LogCollection
+import config.CDSConfig
 
 import scala.io.Source
 import scala.xml.{Elem, Node}
@@ -37,7 +38,7 @@ object CDSRoute {
     getMethodAttrib(n,"name").getOrElse("(no name)")
   }
 
-  def readRoute(x: Node):CDSRoute = {
+  def readRoute(x: Node,config:CDSConfig):CDSRoute = {
     /*
     this call is effectively a filter chain
     the first line in the block after for is what to iterate on
@@ -48,29 +49,33 @@ object CDSRoute {
       child <- x.nonEmptyChildren
       if !child.isAtom
     } yield CDSMethod(
-      child.label,getMethodName(child),getFileRequirements(child),getMethodParams(child)
+      child.label,getMethodName(child),getFileRequirements(child),getMethodParams(child),
+      /* using .get() here should be OK provided that routes are validated against the XSD before this method is called*/
+      config.getLogCollection(getMethodAttrib(x,"name").getOrElse("(no name"),
+        getMethodAttrib(x,"type").get)
     )
 
     CDSRoute(getMethodAttrib(x,"name").getOrElse("(no name)"),
       getMethodAttrib(x,"type").get,
-      methodList)
+      methodList,
+      config)
   }
 
-  def fromFile(filename:String) = {
+  def fromFile(filename:String,config:CDSConfig) = {
     val src = Source.fromFile(filename,"utf8")
     val parser = ConstructingParser.fromSource(src,true)
 
-    readRoute(parser.document().docElem)
+    readRoute(parser.document().docElem,config)
   }
 }
 
-case class CDSRoute(name: String,routetype:String,methods:Seq[CDSMethod]) {
+case class CDSRoute(name: String,routetype:String,methods:Seq[CDSMethod],config:CDSConfig) {
   def dump = {
     println("Got route name " + name + " (" + routetype + ")")
     methods.foreach(x=>{x.dump})
   }
 
   def runRoute(loggerCollection:LogCollection) = {
-    methods.foreach(curMethod=>{curMethod.execute(loggerCollection)})
+    methods.foreach(curMethod=>{curMethod.execute})
   }
 }

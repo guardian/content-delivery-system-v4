@@ -1,0 +1,11 @@
+loggers:
+  - name: logging.Log4jLogger
+    enabled: "true"
+    Param1: val1
+  - name: logging.ClassicLogger
+    enabled: "true"
+    basepath: /var/log/cds_backend
+  - name: logging.invalidLoggerName
+    enabled: "true"
+datastore:
+  class: datastore.SqliteBackedDatastore
