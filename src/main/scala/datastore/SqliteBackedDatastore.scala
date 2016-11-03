@@ -69,8 +69,6 @@ class SqliteBackedDatastore(params:Map[String,String]) extends Datastore {
     try {
       db.setAutoCommit(false)
       val sourceId = getSourceIdSync(whoami, "cds")
-      println(s"sourceId is $sourceId")
-      println(s"params are $params")
 
       val maybeSt: Option[PreparedStatement] = section match {
         case "meta" | "media" | "track" =>
@@ -115,14 +113,11 @@ class SqliteBackedDatastore(params:Map[String,String]) extends Datastore {
     try {
       val st = db.prepareStatement("SELECT value from meta where key=?")
 
-      println(s"looking up $keys")
-      keys.map(k =>
-        try {
-          st.setString(1, k)
-          val r = st.executeQuery()
-          println(s"got ${r.getString(1)} for $k")
-          (k, r.getString(1))
-        }
+      keys.map(k => {
+        st.setString(1, k)
+        val r = st.executeQuery()
+        (k, r.getString(1))
+      }
       ).toMap[String, String]
     } finally {
       db.close()

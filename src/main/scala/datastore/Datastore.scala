@@ -32,16 +32,11 @@ trait Datastore {
 
   def substituteString(input:String):Future[String] = {
     def nextSubstitution(string:String,futures:List[Future[(String,String)]]):List[Future[(String,String)]] = {
-      println(s"string is '$string'")
       val start = string indexOf "{"
-      if(start == -1){
-        println("no more subs")
-        return futures
-      }
+      if(start == -1) return futures
+
       val end = string indexOf "}"
       val identifier = string.substring(start,end+1)
-
-      println(s"identifier is $identifier")
 
       val to_sub = identifier match {
         case r"\{(\w+)$section:(\w+)${key}\}$$"=>get(section,key)
@@ -57,15 +52,8 @@ trait Datastore {
     //build the whole lot into a string, returned as a Future
     //Future.sequence(nextSubstitution("blah",List())).map(_.mkString)
     Future.sequence(nextSubstitution(input,List()))
-      .map(_.foldLeft(input)((str:String,subtuple:(String,String))=>{
-        println(s"replacing ${subtuple._1} with ${subtuple._2}")
+      .map(_.foldLeft(input)((str:String,subtuple:(String,String)) =>
         str.replace(subtuple._1,subtuple._2)
-      }))
-
+      ))
   }
 }
-
-
-/* "A have got a {media:something} with a {meta:something_else} and a {config:whatsit}" */
-
-/* Await.result(store.substituteString("my {meta:info} string"), delay) */
