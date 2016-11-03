@@ -4,7 +4,7 @@ import logging.LogCollection
 import config.CDSConfig
 
 import scala.io.Source
-import scala.xml.Node
+import scala.xml.{Elem, Node}
 import scala.xml.parsing.ConstructingParser
 
 /**
@@ -17,46 +17,51 @@ object CDSRoute {
     takeFilesContent.split("\\|")
   }
 
-  def getMethodParams(n:Node):Map[String,String] = {
-    n.child.filter(
-      x=>{
-        x.label match {
-          case "#PCDATA"=>false
-          case "take-files"=>false
-          case _=>true
-        }
-      }
-    ).map (x=>{x.label->x.text}).toMap
-  }
+  def getMethodParams(n:Node):Map[String,String] =
+  /*
+  collect allows us to run a different mapping function depending on the data type incoming
+  here we iterate all child nodes, but only take the ones that are Elements (Elem) (thus filtering out #PCDATA)
+  and map it to a list of tuples label->text.  we then convert this to a String-String map.
+   */
+    n.child.collect {
+      case e: Elem if e.label != "take-files" =>
+        e.label -> e.text
+    }.toMap
 
-  def getMethodAttrib(n:Node,attName:String):String = {
-    n.attribute(attName) match {
-      case Some(nodeseq) => nodeseq.head.text
-      case _ => "(noname)"
+  def getMethodAttrib(n:Node,attName:String):Option[String] =
+    n \@ attName match {
+      case "" => None
+      case attr => Some(attr)
     }
-  }
 
   def getMethodName(n:Node):String = {
-    getMethodAttrib(n,"name")
+    getMethodAttrib(n,"name").getOrElse("(no name)")
   }
 
-  def readRoute(x: Node,config:CDSConfig):CDSRoute = {
-    val logCollection = config.getLogCollection(getMethodName(x),getMethodAttrib(x,"type"))
-    val methodList:Seq[CDSMethod] = x.nonEmptyChildren.
-      filter(!_.isAtom).
-      map(y =>{
-        CDSMethod(y.label,getMethodName(y),getFileRequirements(y),getMethodParams(y),logCollection)
-      })
-    CDSRoute(getMethodName(x),getMethodAttrib(x,"type"),methodList,config)
+  def readRoute(x: Node):CDSRoute = {
+    /*
+    this call is effectively a filter chain
+    the first line in the block after for is what to iterate on
+    each following line is a filter if it starts with "if" or a map otherwise
+    then the yield is evaluated for the output of the filter chain.
+     */
+    val methodList = for {
+      child <- x.nonEmptyChildren
+      if !child.isAtom
+    } yield CDSMethod(
+      child.label,getMethodName(child),getFileRequirements(child),getMethodParams(child)
+    )
+
+    CDSRoute(getMethodAttrib(x,"name").getOrElse("(no name)"),
+      getMethodAttrib(x,"type").get,
+      methodList)
   }
 
   def fromFile(filename:String,config:CDSConfig) = {
     val src = Source.fromFile(filename,"utf8")
-    val parser = new ConstructingParser(src,true)
-    parser.initialize
-    val doc = parser.document()
+    val parser = ConstructingParser.fromSource(src,true)
 
-    readRoute(doc.children.head,config)
+    readRoute(parser.document().docElem)
   }
 }
 

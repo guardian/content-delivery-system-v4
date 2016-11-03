@@ -19,3 +19,5 @@ libraryDependencies += "com.fasterxml.jackson.core" % "jackson-databind" % "2.8.
 libraryDependencies += "com.fasterxml.jackson.module" % "jackson-module-scala_2.11" % "2.8.2"
 
 libraryDependencies += "org.yaml" % "snakeyaml" % "1.17"
+// https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc
+libraryDependencies += "org.xerial" % "sqlite-jdbc" % "3.8.11.2"
