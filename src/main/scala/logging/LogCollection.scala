@@ -46,13 +46,13 @@ case class LogCollection(activeLoggers:Seq[Logger]) {
   def activeLoggerCount:Integer = activeLoggers.size
 
   //def relayMessage(msg:String,currentMethod:CDSMethod,severity:String) = activeLoggers.foreach(x=>x.relayMessage(msg,currentMethod,severity))
-  def relayMessage(msg:String, sender:CDSMethod, severity: String) = logQueue.add(Some(LogMessage(msg,severity,sender)))
+  def relayMessage(msg:String, sender:Option[CDSMethod], severity: String) = logQueue.add(Some(LogMessage(msg,severity,sender)))
   def relayMessage(m:LogMessage) = logQueue.add(Some(m))
 
-  def log(msg:String,curMethod:CDSMethod) = relayMessage(msg,curMethod,"log")
-  def debug(msg:String,curMethod:CDSMethod) = relayMessage(msg,curMethod,"debug")
-  def error(msg:String,curMethod:CDSMethod) = relayMessage(msg,curMethod,"error")
-  def warn(msg:String,curMethod:CDSMethod) = relayMessage(msg,curMethod,"warn")
+  def log(msg:String,curMethod:Option[CDSMethod]) = relayMessage(msg,curMethod,"log")
+  def debug(msg:String,curMethod:Option[CDSMethod]) = relayMessage(msg,curMethod,"debug")
+  def error(msg:String,curMethod:Option[CDSMethod]) = relayMessage(msg,curMethod,"error")
+  def warn(msg:String,curMethod:Option[CDSMethod]) = relayMessage(msg,curMethod,"warn")
 
   def methodStarting(newMethod: CDSMethod): Unit =
     activeLoggers.foreach(x=>x.methodStarting(newMethod))

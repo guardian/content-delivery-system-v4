@@ -4,10 +4,17 @@ import java.io.InputStream
 
 import logging.LogCollection
 import java.nio.file.{Files, Path, Paths}
-
+import datastore.Datastore
 import config.CDSConfig
 
-case class CDSMethod(methodType: String, name:String, requiredFiles: Seq[String], params: Map[String,String],log:LogCollection) extends ExternalCommand {
+case class CDSMethod(methodType: String,
+                     name:String,
+                     requiredFiles: Seq[String],
+                     params: Map[String,String],
+                     log:LogCollection,
+                     store:Option[Datastore])
+  extends ExternalCommand {
+
   val METHODS_BASE_PATH = "/usr/local/lib/cds_backend"
 
   def findFile:Option[Path] = {
@@ -33,15 +40,14 @@ case class CDSMethod(methodType: String, name:String, requiredFiles: Seq[String]
   }
 
   def execute:Boolean = {
-    log.log("Executing method " + name + " as " + methodType,this)
+    log.log("Executing method " + name + " as " + methodType,Some(this))
 
     findFile match {
-        //fixme: replace param with Option so can use None instead of null
-      case None=>log.error("Could not find executable for "+name+" in "+ METHODS_BASE_PATH,null)
+      case None=>log.error("Could not find executable for "+name+" in "+ METHODS_BASE_PATH,None)
       case Some(path)=>
         runCommand(path.toString,Seq())
     }
-    log.error("This method has not yet been implemented!", this)
+    log.error("This method has not yet been implemented!", Some(this))
     false
   }
 

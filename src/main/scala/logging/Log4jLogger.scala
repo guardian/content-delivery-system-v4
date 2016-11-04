@@ -13,9 +13,13 @@ class Log4jLogger(params:Map[String,String],routeName:String,routeType:String) e
 
   override def init(params:Map[String,String]):Logger = this
 
-  override def relayMessage(msg: String, curMethod: CDSMethod, severity: String): Unit = {
+  override def relayMessage(msg: String, curMethod: Option[CDSMethod], severity: String): Unit = {
     Future {
-      val logstring = curMethod.name + ": " + msg
+      val methodName = curMethod match {
+        case Some(method)=>method.name
+        case None=>"CDS"
+      }
+      val logstring = s"$methodName: $msg"
       severity match {
         case "log" => l4j.info(logstring)
         case "error" => l4j.error(logstring)

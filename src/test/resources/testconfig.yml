@@ -9,3 +9,4 @@ loggers:
     enabled: "true"
 datastore:
   class: datastore.SqliteBackedDatastore
+  databasepath: /tmp

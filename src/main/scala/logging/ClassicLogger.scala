@@ -29,8 +29,13 @@ class ClassicLogger(params: Map[String, String],routeName:String,routeType:Strin
 
   }
 
-  override def relayMessage(msg: String, curMethod: CDSMethod, severity: String): Unit =
-    Future { printwriter.write("\t" + curMethod.name + s": $severity: $msg") }
+  override def relayMessage(msg: String, curMethod: Option[CDSMethod], severity: String): Unit = Future {
+      val methodName = curMethod match {
+        case Some(method)=>method.name
+        case None=>"CDS"
+      }
+      printwriter.write(s"\t$methodName: $severity: $msg")
+    }
 
   override def datastoreUpdated(by: CDSMethod, values: Map[String, String]): Unit = {}
 

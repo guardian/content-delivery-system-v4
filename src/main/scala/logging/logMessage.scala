@@ -1,9 +1,14 @@
 package logging
 import CDS.CDSMethod
 
-case class LogMessage(msg:String, severity: String, sender:CDSMethod) {
+case class LogMessage(msg:String, severity: String, sender:Option[CDSMethod]) {
   override def toString: String = {
-    sender.name + ": " + severity.toLowerCase() match {
+    val senderName = sender match {
+      case Some(method)=>method.name
+      case None=>"CDS"
+    }
+
+    val lineend = severity.toLowerCase() match {
       case "error"=>
         "-ERROR: " + msg
       case "warn"=>
@@ -15,5 +20,6 @@ case class LogMessage(msg:String, severity: String, sender:CDSMethod) {
       case "ok"=>
         "+OK: " + msg
     }
+    s"$senderName: $lineend"
   }
 }
