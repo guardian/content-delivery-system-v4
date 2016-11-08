@@ -31,7 +31,7 @@ object CDSConfig {
 
     val datastoreConfig = configdata.get("datastore").asInstanceOf[java.util.Map[String,String]].toMap
 
-    println("INFO: Attempting to initialise datastore " + datastoreConfig.get("class"))
+    //println("INFO: Attempting to initialise datastore " + datastoreConfig.get("class"))
     val datastoreImpl = try {
       val cstrct = Class.forName(datastoreConfig.getOrElse("class","(no class provided)")).getConstructors
 
@@ -50,15 +50,15 @@ object CDSConfig {
                 case Some(g)=>true
                 case _=>false
               }).map(x=>x.get),
-      datastoreImpl
+      datastoreImpl,
+      configdata.getOrDefault("paths",Map()).asInstanceOf[java.util.Map[String,String]].toMap
     )
-
   }
 
-  def placeholder = CDSConfig(Set(),None)
+  def placeholder(paths:Map[String,String]) = CDSConfig(Set(),None,paths)
 }
 
-case class CDSConfig(loggers:Set[LoggerConfig],datastore:Option[Datastore]) {
+case class CDSConfig(loggers:Set[LoggerConfig],datastore:Option[Datastore],paths:Map[String,String]) {
   def getLogCollection(routeName:String,routeType:String):LogCollection = {
     LogCollection.fromConfig(loggers,routeName,routeType)
   }

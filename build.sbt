@@ -6,6 +6,12 @@ scalaVersion := "2.11.8"
 
 libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.0" % "test"
 
+// https://mvnrepository.com/artifact/org.scalamock/scalamock-core_2.11
+libraryDependencies += "org.scalamock" % "scalamock-core_2.11" % "3.3.0"
+
+// https://mvnrepository.com/artifact/org.scalamock/scalamock-scalatest-support_2.11
+libraryDependencies += "org.scalamock" % "scalamock-scalatest-support_2.11" % "3.3.0"
+
 libraryDependencies += "org.scala-lang" % "scala-xml" % "2.11.0-M4"
 
 libraryDependencies += "org.apache.logging.log4j" % "log4j-core" % "2.7"

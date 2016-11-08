@@ -54,7 +54,8 @@ object CDSRoute {
       getMethodParams(child),
       /* using .get() here should be OK provided that routes are validated against the XSD before this method is called*/
       config.getLogCollection(getMethodAttrib(x,"name").getOrElse("(no name)"), getMethodAttrib(x,"type").get),
-      config.datastore
+      config.datastore,
+      config
     )
 
     CDSRoute(getMethodAttrib(x,"name").getOrElse("(no name)"),

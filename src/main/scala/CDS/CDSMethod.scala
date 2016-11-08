@@ -14,22 +14,27 @@ case class CDSMethod(methodType: String,
                      requiredFiles: Seq[String],
                      params: Map[String,String],
                      log:LogCollection,
-                     store:Option[Datastore])
+                     store:Option[Datastore],
+                     config: CDSConfig)
     extends ExternalCommand {
-  val METHODS_BASE_PATH = "/usr/local/lib/cds_backend"
 
-  def findFile:Option[Path] = {
-    val extensions = List("",".rb",".pl",".py",".js")
+  val METHODS_BASE_PATH = config.paths.get("methods") match {
+    case Some(path)=>path
+    case None=>"/usr/local/lib/cds_backend"
+  }
+
+  def findFile:Option[String] = {
+    val extensions = List("",".rb",".pl",".py",".js",".sh")
 
     val filesList = extensions
       .map(xtn=>Paths.get(METHODS_BASE_PATH,name + xtn))
       .filter(path=>Files.exists(path))
     filesList.length match {
       case 0=>None
-      case 1=>Some(filesList.head)
+      case 1=>Some(filesList.head.toString)
       case _=>
         log.warn("Multiple methods found for " + name + ":" + filesList,null)
-        Some(filesList.head)
+        Some(filesList.head.toString)
     }
   }
 

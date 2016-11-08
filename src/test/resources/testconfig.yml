@@ -10,3 +10,5 @@ loggers:
 datastore:
   class: datastore.SqliteBackedDatastore
   databasepath: /tmp
+paths:
+  methods: /usr/local/lib/cds_backend
