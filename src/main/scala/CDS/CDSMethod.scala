@@ -5,9 +5,15 @@ import java.io.InputStream
 import logging.LogMessage
 import logging.LogCollection
 import java.nio.file.{Files, Path, Paths}
+
 import datastore.Datastore
 import config.CDSConfig
+
 import scala.io.Source
+
+object CDSReturnCode extends Enumeration {
+  val SUCCESS, NOTFOUND, FAILURE, STOPROUTE, UNKNOWN = Value
+}
 
 case class CDSMethod(methodType: String,
                      name:String,
@@ -50,26 +56,31 @@ case class CDSMethod(methodType: String,
     }
   }
 
-  def execute:Boolean = {
+  def execute:CDSReturnCode.Value = {
     log.log("Executing method " + name + " as " + methodType,Some(this))
 
     findFile match {
-      case None=>log.error("Could not find executable for "+name+" in "+ METHODS_BASE_PATH,None)
+      case None=>
+        log.error("Could not find executable for "+name+" in "+ METHODS_BASE_PATH,None)
+        CDSReturnCode.NOTFOUND
       case Some(path)=>
         val p = runCommand(path.toString,Seq())
         p.exitValue() match {
           case 0=>
             log.log("Method exited cleanly",Some(this))
+            CDSReturnCode.SUCCESS
           case 1=>
             log.warn("Method executed with failure",Some(this))
+            CDSReturnCode.FAILURE
           case 2=>
             log.warn("Method failed and signalled to stop block process",Some(this))
+            CDSReturnCode.STOPROUTE
           case _=>
             log.error("Method returned a non-standard failure code",Some(this))
+            CDSReturnCode.UNKNOWN
         }
     }
-    log.error("This method has not yet been implemented!", Some(this))
-    false
+
   }
 
   def dump = { /*print out info to stdout */
