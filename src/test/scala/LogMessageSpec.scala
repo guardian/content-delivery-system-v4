@@ -20,43 +20,43 @@ new LogMessage(msg,severity,sender)
   "A logging.LogMessage" should "correctly match INFO line prefix" in {
     val m=LogMessage.fromString("INFO: blahblahblah",None)
     m.severity should be ("info")
-    m.msg should be ("INFO: blahblahblah")
+    m.msg should be ("blahblahblah")
   }
 
   it should "correctly match DEBUG line prefix" in {
     val m=LogMessage.fromString("DEBUG: blahblahblah",None)
     m.severity should be ("debug")
-    m.msg should be ("DEBUG: blahblahblah")
+    m.msg should be ("blahblahblah")
   }
 
   it should "correctly match WARN line prefix" in {
     val m=LogMessage.fromString("-WARN: blahblahblah",None)
     m.severity should be ("warning")
-    m.msg should be ("-WARN: blahblahblah")
+    m.msg should be ("blahblahblah")
   }
 
   it should "correctly match ERROR line prefix" in {
     val m=LogMessage.fromString("-ERROR: blahblahblah",None)
     m.severity should be ("error")
-    m.msg should be ("-ERROR: blahblahblah")
+    m.msg should be ("blahblahblah")
   }
 
   it should "correctly match FATAL line prefix" in {
     val m=LogMessage.fromString("-FATAL: blahblahblah",None)
     m.severity should be ("fatal")
-    m.msg should be ("-FATAL: blahblahblah")
+    m.msg should be ("blahblahblah")
   }
 
   it should "correctly match SUCCESS line prefix" in {
     val m=LogMessage.fromString("+SUCCESS: blahblahblah",None)
     m.severity should be ("ok")
-    m.msg should be ("+SUCCESS: blahblahblah")
+    m.msg should be ("blahblahblah")
   }
 
   it should "correctly match OK line prefix" in {
     val m=LogMessage.fromString("OK: blahblahblah",None)
     m.severity should be ("ok")
-    m.msg should be ("OK: blahblahblah")
+    m.msg should be ("blahblahblah")
   }
 
   it should "correctly match absence of line prefix" in {
