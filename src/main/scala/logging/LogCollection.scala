@@ -33,31 +33,40 @@ case class LogCollection(activeLoggers:Seq[Logger]) {
       var shouldExit:Boolean = false
       do {
         logQueue.poll() match {
-          case null=>Thread.sleep(1000)
+          case null=>Thread.sleep(1000) //no messages matched
           case Some(msg)=>
-            activeLoggers.foreach(x=>x.relayMessage(msg))
+            activeLoggers.foreach(x=>x.relayMessage(msg)) //we got a message
           case None=>
-            shouldExit=true
+            shouldExit=true  //None was sent=>should terminate
         }
       } while(!shouldExit)
     }
   }
 
+  def init = {
+    val p = new logProcessor(logQueue)
+    p.run()
+  }
+
   def activeLoggerCount:Integer = activeLoggers.size
 
   //def relayMessage(msg:String,currentMethod:CDSMethod,severity:String) = activeLoggers.foreach(x=>x.relayMessage(msg,currentMethod,severity))
-  def relayMessage(msg:String, sender:Option[CDSMethod], severity: String) = logQueue.add(Some(LogMessage(msg,severity,sender)))
+  //def relayMessage(msg:String, sender:Option[CDSMethod], severity: String) = logQueue.add(Some(LogMessage(msg,severity,sender)))
   def relayMessage(m:LogMessage) = logQueue.add(Some(m))
 
-  def log(msg:String,curMethod:Option[CDSMethod]) = relayMessage(msg,curMethod,"log")
-  def debug(msg:String,curMethod:Option[CDSMethod]) = relayMessage(msg,curMethod,"debug")
-  def error(msg:String,curMethod:Option[CDSMethod]) = relayMessage(msg,curMethod,"error")
-  def warn(msg:String,curMethod:Option[CDSMethod]) = relayMessage(msg,curMethod,"warn")
+  def log(msg:String,curMethod:Option[CDSMethod]) = relayMessage(LogMessage(msg,"log",curMethod))
+  def debug(msg:String,curMethod:Option[CDSMethod]) = relayMessage(LogMessage(msg,"debug",curMethod))
+  def error(msg:String,curMethod:Option[CDSMethod]) = relayMessage(LogMessage(msg,"error",curMethod))
+  def warn(msg:String,curMethod:Option[CDSMethod]) = relayMessage(LogMessage(msg,"warn",curMethod))
 
   def methodStarting(newMethod: CDSMethod): Unit =
     activeLoggers.foreach(x=>x.methodStarting(newMethod))
   def methodFinished(method: CDSMethod, success: Boolean, nonfatal: Boolean): Unit =
     activeLoggers.foreach(x=>x.methodFinished(method,success,nonfatal))
 
-  def teardown = activeLoggers.foreach(x=>x.teardown)
+  def teardown:Unit = {
+    logQueue.add(None)
+
+    activeLoggers.foreach(x=>x.teardown)
+  }
 }

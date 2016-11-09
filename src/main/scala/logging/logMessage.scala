@@ -8,13 +8,14 @@ object LogMessage {
 
   def fromString(msg:String, sender:Option[CDSMethod]):LogMessage = {
     val severity = msg match {
-      case r"^\s*[+-]*INFO"=>"info"
-      case r"^\s*[+-]*DEBUG"=>"debug"
-      case r"^\s*[+-]*WARN"=>"warning" //also gets "WARNING"
-      case r"^\s*[+-]*ERROR"=>"error"
-      case r"^\s*[+-]*FATAL"=>"fatal"
-      case r"^\s*[+-]*SUCCESS"=>"ok"
-      case r"^\s*[+-]*OK"=>"ok"
+      case r"\s*INFO"=>"info"
+      case r"\s*DEBUG.*"=>"debug"
+      case r"\s*[-]*WARN.*"=>"warning" //also gets "WARNING"
+      case r"\s*[-]*ERROR.*"=>"error"
+      case r"\s*[-]*FATAL.*"=>"fatal"
+      case r"\s*[+]*SUCCESS.*"=>"ok"
+      case r"\s*[+]*OK.*"=>"ok"
+      case _=>"info"
     }
     new LogMessage(msg,severity,sender)
   }
@@ -38,6 +39,8 @@ case class LogMessage(msg:String, severity: String, sender:Option[CDSMethod]) {
         "+OK: " + msg
       case "ok"=>
         "+OK: " + msg
+      case "info"=>
+        "INFO:" + msg
     }
     s"$senderName: $lineend"
   }
