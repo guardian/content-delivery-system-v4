@@ -108,7 +108,7 @@ class LoggerCollectionSpec extends FlatSpec with Matchers with MockFactory{
     val collection = LogCollection(List(lg))
     val mthd = CDSMethod("test-method","stringtest",Seq(),Map(),collection,None,CDSConfig.placeholder(Map()))
 
-    inAnyOrder {  //since these are called via Futures, they can happen in any order
+    inAnyOrder {  //since these are called via Futures, they can happen in any order. Serialization is tested below.
       (lg.methodFinished _).expects(mthd, true, false)
       (lg.methodFinished _).expects(mthd, true, true)
       (lg.methodFinished _).expects(mthd, false, true)
