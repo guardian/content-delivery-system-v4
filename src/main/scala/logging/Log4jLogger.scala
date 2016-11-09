@@ -13,8 +13,7 @@ class Log4jLogger(params:Map[String,String],routeName:String,routeType:String) e
 
   override def init(params:Map[String,String]):Logger = this
 
-  override def relayMessage(msg: String, curMethod: Option[CDSMethod], severity: String): Unit = {
-    Future {
+  override def relayMessage(msg: String, curMethod: Option[CDSMethod], severity: String) = Future {
       val methodName = curMethod match {
         case Some(method)=>method.name
         case None=>"CDS"
@@ -28,13 +27,13 @@ class Log4jLogger(params:Map[String,String],routeName:String,routeType:String) e
         case _ => l4j.debug(logstring)
       }
     }
-  }
+
 
   override def teardown: Boolean = true
 
-  override def datastoreUpdated(by: CDSMethod, values: Map[String, String]): Unit = {}
+  override def datastoreUpdated(by: CDSMethod, values: Map[String, String]) = Future {}
 
-  override def methodStarting(newMethod: CDSMethod): Unit = {}
+  override def methodStarting(newMethod: CDSMethod)= Future {}
 
-  override def methodFinished(method: CDSMethod, success: Boolean, nonfatal: Boolean): Unit = {}
+  override def methodFinished(method: CDSMethod, success: Boolean, nonfatal: Boolean) = Future {}
 }

@@ -1,17 +1,11 @@
 package logging
 
 import CDS.{CDSMethod, CDSRoute}
-
-import scala.collection.mutable.SynchronizedQueue
-import java.util.concurrent.ConcurrentLinkedQueue
 import scala.concurrent.ExecutionContext.Implicits.global
 import config.LoggerConfig
+import scala.concurrent.duration.Duration
 
-import scala.concurrent.Future
-
-/**
-  * Created by localhome on 21/10/2016.
-  */
+import scala.concurrent.{Await, Future}
 
 object LogCollection {
   def fromConfig(loggerInfo:Set[LoggerConfig],routeName:String,routeType:String) = {
@@ -27,51 +21,24 @@ object LogCollection {
 
 
 case class LogCollection(activeLoggers:Seq[Logger]) {
-  val DEFAULT_SLEEP_DELAY = 1000 //milliseconds
-//  val logQueue = new ConcurrentLinkedQueue[Option[LogMessage]]
-//
-//  class logProcessor(logQueue:ConcurrentLinkedQueue[Option[LogMessage]]) extends Runnable {
-//    override def run(): Unit = {
-//      var shouldExit:Boolean = false
-//      do {
-//        logQueue.poll() match {
-//          case null=>Thread.sleep(1000) //no messages matched
-//          case Some(msg)=>
-//            activeLoggers.foreach(x=>x.relayMessage(msg)) //we got a message
-//          case None=>
-//            shouldExit=true  //None was sent=>should terminate
-//        }
-//      } while(!shouldExit)
-//    }
-//  }
-
-//  def runthread = {
-//    val p = new logProcessor(logQueue)
-//    p.run()
-//  }
 
   def activeLoggerCount:Integer = activeLoggers.size
 
-  //def relayMessage(msg:String,currentMethod:CDSMethod,severity:String) = activeLoggers.foreach(x=>x.relayMessage(msg,currentMethod,severity))
-  //def relayMessage(msg:String, sender:Option[CDSMethod], severity: String) = logQueue.add(Some(LogMessage(msg,severity,sender)))
-  //def relayMessage(m:LogMessage) = logQueue.add(Some(m))
-
-  //def relayMessage(msg:LogMessage) = Future { activeLoggers.foreach(x=>x.relayMessage(msg))}
-  def relayMessage(msg:LogMessage) = activeLoggers.foreach(x=>x.relayMessage(msg))
+  def relayMessage(msg:LogMessage):Seq[Future[Unit]] = activeLoggers.map(x=>x.relayMessage(msg))
 
   def log(msg:String,curMethod:Option[CDSMethod]) = relayMessage(LogMessage(msg,"info",curMethod))
   def debug(msg:String,curMethod:Option[CDSMethod]) = relayMessage(LogMessage(msg,"debug",curMethod))
   def error(msg:String,curMethod:Option[CDSMethod]) = relayMessage(LogMessage(msg,"error",curMethod))
   def warn(msg:String,curMethod:Option[CDSMethod]) = relayMessage(LogMessage(msg,"warning",curMethod))
 
-  def methodStarting(newMethod: CDSMethod): Unit =
-    activeLoggers.foreach(x=>x.methodStarting(newMethod))
-  def methodFinished(method: CDSMethod, success: Boolean, nonfatal: Boolean): Unit =
-    activeLoggers.foreach(x=>x.methodFinished(method,success,nonfatal))
+  def methodStarting(newMethod: CDSMethod): Seq[Future[Unit]] =
+    activeLoggers.map(x=>x.methodStarting(newMethod))
+  def methodFinished(method: CDSMethod, success: Boolean, nonfatal: Boolean): Seq[Future[Unit]] =
+    activeLoggers.map(x=>x.methodFinished(method,success,nonfatal))
 
-  def teardown:Unit = {
-    //logQueue.add(None)
+  /* You _can_ call this to wait for the logging backends to finish their output, not recommended but hey */
+  def waitFor(futures:Seq[Future[Unit]],timeout:Duration) = Await.ready(Future.sequence(futures),timeout)
 
-    activeLoggers.foreach(x=>x.teardown)
-  }
+  def teardown:Unit = activeLoggers.foreach(x=>x.teardown)
+
 }
