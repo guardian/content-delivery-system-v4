@@ -22,13 +22,14 @@ case class FileCollection(mediaFile:String,inmetaFile:String,metaFile:String,xml
     FileCollection(newMediaFile,newInmetaFile,newMetaFile,newXmlFile,dsLocation,tempFile)
   }
 
-  def close = {
+  def close:Boolean = {
     try {
       val f = new java.io.File(tempFile)
       f.delete()
+      true
     } catch {
       case _:Throwable=>
-        println("Unable to delete tempfile")
+        false
     }
   }
 
@@ -47,27 +48,38 @@ object FileCollection {
 
     tempFileDir.mkdirs()
     val tmpfiledata = src.getLines().map(_ match {
-        case r"\s*([^=]+)${key}\s*=(.*)${value}"=>(key,value)
-    }).toMap
+        case r"\s*([^=]+)${key}\s*=(.*)${value}"=>Some((key,value))
+        case _=>None
+    }).filter(_ match {
+      case Some(tuple)=>true
+      case None=>false
+    }).map(_.get)
+        .toMap
+
+    src.close()
 
     println(s"tmpfiledata got $tmpfiledata")
 
     if(tmpfiledata.contains("batch")){
       println("batch mode detected")
+      val newsrc = Source.fromFile(tempFile)
 
-      src.getLines().map(_ match {
-        case r"\s*([^,]+)${media},([^,]+)${inmeta},([^,]+)${meta},([^,]+)${xml}.*"=>
-        previous match {
-          case Some(fileCollection)=>
-            fileCollection.replace(Some(media),Some(inmeta),Some(meta),Some(xml))
-          case None=>
-            val newtempfile = java.io.File.createTempFile("cds_",".tmp",tempFileDir)
-            FileCollection(media,inmeta,meta,xml,newDatastoreLocation.get,newtempfile.getAbsolutePath)
-        }
-      }).toList
-
+      newsrc.getLines().map({
+        case r"\s*([^,]*)${media},([^,]*)${inmeta},([^,]*)${meta},([^,]*)${xml}\s*"=>
+          previous match {
+            case Some(fileCollection)=>
+              Some(fileCollection.replace(Some(media),Some(inmeta),Some(meta),Some(xml)))
+            case None=>
+              val newtempfile = java.io.File.createTempFile("cds_",".tmp",tempFileDir)
+              Some(FileCollection(media,inmeta,meta,xml,newDatastoreLocation.get,newtempfile.getAbsolutePath))
+          }
+        case _=>None
+      }).filter(_ match {
+        case Some(fc)=>true
+        case None=>false
+      }).map(_.get)
+        .toList
     } else {
-
       val paramList:List[Option[String]] = List("cf_media_file","cf_inmeta_file","cf_meta_file","cf_xml_file")
         .map(filetype=>{
           if(tmpfiledata.contains(filetype)){

@@ -1,0 +1,5 @@
+batch=true
+mediafile1,inmetafile1,,
+mediafile2,inmetafile2,,
+mediafile3,inmetafile3,,xmlfile3
+,,metafile4,xmlfile4
