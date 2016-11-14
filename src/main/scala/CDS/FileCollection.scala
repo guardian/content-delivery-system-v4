@@ -1,7 +1,8 @@
 package CDS
 import scala.io.Source
+import java.net.URI
 
-case class FileCollection(mediaFile:String,inmetaFile:String,metaFile:String,xmlFile:String,dsLocation:String,tempFile:String) {
+case class FileCollection(mediaFile:String,inmetaFile:String,metaFile:String,xmlFile:String,dsLocation:URI,tempFile:String) {
   def replace(xmediaFile:Option[String],xinmetaFile:Option[String],xmetaFile:Option[String],xxmlFile:Option[String]):FileCollection = {
     val newMediaFile = xmediaFile match {
       case Some(filename)=>filename
@@ -37,14 +38,28 @@ case class FileCollection(mediaFile:String,inmetaFile:String,metaFile:String,xml
 }
 
 object FileCollection {
+  val tempFileDir=new java.io.File("/tmp/cds_backend")
+
   implicit class Regex(sc: StringContext) {
     def r = new util.matching.Regex(sc.parts.mkString, sc.parts.tail.map(_ => "x"): _*)
   }
 
-  def fromTempFile(tempFile:String,previous:Option[FileCollection],newDatastoreLocation:Option[String]):List[FileCollection] = {
-    val src = Source.fromFile(tempFile)
+  def fromOptionMap(optionMap:Map[Symbol,String],datastoreLocation:URI) = {
+    tempFileDir.mkdirs()
+    val newtempfile = java.io.File.createTempFile("cds_",".tmp",tempFileDir)
 
-    val tempFileDir=new java.io.File("/tmp/cds_backend")
+    FileCollection(
+      optionMap.getOrElse('media,""),
+      optionMap.getOrElse('meta,""),
+      optionMap.getOrElse('inmeta,""),
+      optionMap.getOrElse('xml,""),
+      datastoreLocation,
+      newtempfile.getAbsolutePath
+    )
+  }
+
+  def fromTempFile(tempFile:String,previous:Option[FileCollection],newDatastoreLocation:Option[URI]):List[FileCollection] = {
+    val src = Source.fromFile(tempFile)
 
     tempFileDir.mkdirs()
     val tmpfiledata = src.getLines().map(_ match {

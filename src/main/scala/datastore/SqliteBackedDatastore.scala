@@ -2,6 +2,7 @@ package datastore
 import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
 import java.sql._
+import java.net.URI
 
 /*https://bitbucket.org/xerial/sqlite-jdbc*/
 
@@ -11,7 +12,7 @@ import java.sql._
 class SqliteBackedDatastore(params:Map[String,String]) extends Datastore {
   val databasePath = params("databasepath") + "/" + params("routename") + ".db"
 
-  override def createNewDatastore(params: Map[String, String]) = Future {
+  override def createNewDatastore(params: Map[String, String]) = Future[Boolean] {
     val db = DriverManager.getConnection(s"jdbc:sqlite:$databasePath")
     val st = db.createStatement()
     st.setQueryTimeout(30)
@@ -31,6 +32,10 @@ class SqliteBackedDatastore(params:Map[String,String]) extends Datastore {
     } finally {
       db.close()
     }
+  }
+
+  override def uri: URI = {
+    new URI("file://" + databasePath)
   }
 
   override def close(): Unit = {}

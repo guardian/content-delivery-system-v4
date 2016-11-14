@@ -3,6 +3,7 @@ package datastore
 import scala.concurrent.duration.Duration
 import scala.concurrent.{Await, Future}
 import scala.concurrent.ExecutionContext.Implicits.global
+import java.net.URI
 
 /**
   * Created by localhome on 27/10/2016.
@@ -24,6 +25,8 @@ trait Datastore {
 
   def getSync(section:String, key: String, timeout: Duration):String =
     Await.result(get(section,key), timeout)
+
+  def uri:URI
 
   /*http://stackoverflow.com/questions/4636610/how-to-pattern-match-using-regular-expression-in-scala*/
   implicit class Regex(sc: StringContext) {
