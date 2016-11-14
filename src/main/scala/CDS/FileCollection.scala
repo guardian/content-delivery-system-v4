@@ -62,7 +62,7 @@ object FileCollection {
     val src = Source.fromFile(tempFile)
 
     tempFileDir.mkdirs()
-    val tmpfiledata = src.getLines().map(_ match {
+    val tmpfiledata = src.getLines().map({
       case r"\s*([^=]+)${key}\s*=(.*)${value}"=>Some((key,value))
       case _=>None
     }).filter(_ match {
@@ -75,7 +75,7 @@ object FileCollection {
     tmpfiledata
   }
 
-  def readTempFileBatchModeCSV(tempFile:String,previous:Option[FileCollection],newDatastoreLocation:Option[String],newTempFile:java.io.File):List[FileCollection] = {
+  def readTempFileBatchModeCSV(tempFile:String,previous:Option[FileCollection],newDatastoreLocation:Option[URI],newTempFile:java.io.File):List[FileCollection] = {
     val newsrc = Source.fromFile(tempFile)
 
     newsrc.getLines().map({
