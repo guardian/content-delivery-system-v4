@@ -36,4 +36,30 @@ class FileCollectionSpec extends FlatSpec with Matchers {
     fc(2) should be (FileCollection("mediafile3","inmetafile3","","xmlfile3",u,fc(2).tempFile))
     fc(3) should be (FileCollection("","","metafile4","xmlfile4",u,fc(3).tempFile))
   }
+
+  it should "return a map of environment variables to set" in {
+    val u = new URI("file:///path/to/datastore.db")
+    val fc = FileCollection.fromTempFile("src/test/resources/tempfiles/basicoutput",None,Some(u))
+    val reqd = Seq("media","inmeta","meta","xml","randominvalidthing")
+    fc.length should be (1)
+    fc.head.getEnvironmentMap(reqd) should be (Map(
+      "cf_media_file"->"mediafile",
+      "cf_inmeta_file"->"inmetafile",
+      "cf_meta_file"->"metafile",
+      "cf_xml_file"->"xmlfile",
+      "cf_datastore_location"->"/path/to/datastore.db",
+      "cf_temp_file"->fc.head.tempFile
+    ))
+  }
+
+  it should "throw a runtime exception if the datastore location is not a file:// uri" in {
+    val u =new URI("http://server/some_http/path?something")
+    val fc = FileCollection.fromTempFile("src/test/resources/tempfiles/basicoutput",None,Some(u))
+    val reqd = Seq("media","inmeta","meta","xml","randominvalidthing")
+    fc.length should be (1)
+
+    assertThrows[RuntimeException] {
+      fc.head.getEnvironmentMap(reqd)
+    }
+  }
 }

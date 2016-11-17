@@ -2,7 +2,7 @@ package CDS
 import scala.io.Source
 import java.net.URI
 
-case class FileCollection(mediaFile:String,inmetaFile:String,metaFile:String,xmlFile:String,dsLocation:URI,tempFile:String) {
+case class FileCollection(mediaFile:String,inmetaFile:String,metaFile:String,xmlFile:String,dsLocation:URI,tempFile:String){
   def replace(xmediaFile:Option[String],xinmetaFile:Option[String],xmetaFile:Option[String],xxmlFile:Option[String]):FileCollection = {
     val newMediaFile = xmediaFile match {
       case Some(filename)=>filename
@@ -34,7 +34,25 @@ case class FileCollection(mediaFile:String,inmetaFile:String,metaFile:String,xml
     }
   }
 
-  def tempFilePath = tempFile
+  def getEnvironmentMap(requiredFiles:Seq[String]):Map[String,String] = {
+    if(dsLocation.getScheme != "file") throw new RuntimeException("Non file-based datastores are not yet supported.")
+    requiredFiles.map({
+      case "media"=>Some("cf_media_file"->mediaFile)
+      case "inmeta"=>Some("cf_inmeta_file"->inmetaFile)
+      case "meta"=>Some("cf_meta_file"->metaFile)
+      case "xml"=>Some("cf_xml_file"->xmlFile)
+      case _=>None
+    }).filter({
+      case Some(tuple)=>true
+      case None=>false
+    }).map(
+      _.get
+    ).toMap ++ Map(
+      "cf_datastore_location"->dsLocation.getPath,
+      "cf_temp_file"->tempFile
+    )
+  }
+  
 }
 
 object FileCollection {

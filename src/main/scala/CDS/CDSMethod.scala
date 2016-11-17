@@ -56,15 +56,14 @@ case class CDSMethod(methodType: String,
     }
   }
 
-  def execute:CDSReturnCode.Value = {
+  def execute(fileCollection: FileCollection):CDSReturnCode.Value = {
     log.log("Executing method " + name + " as " + methodType,Some(this))
 
     findFile match {
       case None=>
         log.error("Could not find executable for "+name+" in "+ METHODS_BASE_PATH,None)
-        CDSReturnCode.NOTFOUND
-      case Some(path)=>
-        val p = runCommand(path.toString,Seq(),params)
+        CDSReturnCode.NOTFOUND case Some(path)=>
+        val p = runCommand(path.toString,Seq(),params ++ fileCollection.getEnvironmentMap(requiredFiles))
         p.exitValue() match {
           case 0=>
             log.log("Method exited cleanly",Some(this))

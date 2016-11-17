@@ -95,9 +95,14 @@ case class CDSRoute(name: String,routetype:String,methods:List[CDSMethod],config
 
     def runNextMethod(methodRef:CDSMethod,reminaingMethods:List[CDSMethod],previousFileCollection:FileCollection):CDSReturnCode.Value = {
       val fc=previousFileCollection
-      val r = methodRef.execute
-      if(reminaingMethods.nonEmpty)
-        runNextMethod(reminaingMethods.head,reminaingMethods.tail,fc)
+      val r = methodRef.execute(fc)
+      if(reminaingMethods.nonEmpty) {
+        val fcList = FileCollection.fromTempFile(fc.tempFile, Some(fc), None)
+        if(fcList.length==1)
+          runNextMethod(reminaingMethods.head, reminaingMethods.tail, fcList.head)
+        else
+          loggerCollection.error("Batch mode is not supported yet I'm afraid",None)
+      }
       r
     }
 

@@ -21,7 +21,7 @@ class CDSRouteSpec extends FlatSpec with Matchers {
 
   it should "build CDS.CDSMethod objects for present stanzas" in {
     val config = CDSConfig.placeholder(Map())
-    val route = CDSRoute.fromFile("src/test/resources/test.xml",config)
+    val route = CDSRoute.fromFile("src/test/resources/routes/test.xml",config)
 
     route.name should be ("test")
     route.routetype should be ("active")
@@ -41,6 +41,14 @@ class CDSRouteSpec extends FlatSpec with Matchers {
     route.methods(1).params("hostname") should be ("robert")
     route.methods(1).params("username") should be ("kenneth")
     route.methods(1).params("password") should be ("rabbit")
+
+  }
+
+  it should "execute a sequence of methods" in {
+
+  }
+
+  it should "throw a runtime exception if a method attempts to enter batch mode" in {
 
   }
 }
