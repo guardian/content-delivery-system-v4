@@ -129,11 +129,7 @@ object FileCollection {
     tempFileDir.mkdirs()
     val tmpfiledata = readTempFileKeyValue(tempFile)
 
-    println(s"tmpfiledata got $tmpfiledata")
-
     if(tmpfiledata.contains("batch")){
-      println("batch mode detected")
-
       val newtempfile = java.io.File.createTempFile("cds_",".tmp",tempFileDir)
       readTempFileBatchModeCSV(tempFile,previous,newDatastoreLocation,newtempfile)
     } else {

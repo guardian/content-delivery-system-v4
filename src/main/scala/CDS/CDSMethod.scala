@@ -62,7 +62,8 @@ case class CDSMethod(methodType: String,
     findFile match {
       case None=>
         log.error("Could not find executable for "+name+" in "+ METHODS_BASE_PATH,None)
-        CDSReturnCode.NOTFOUND case Some(path)=>
+        CDSReturnCode.NOTFOUND
+      case Some(path)=>
         val p = runCommand(path.toString,Seq(),params ++ fileCollection.getEnvironmentMap(requiredFiles))
         p.exitValue() match {
           case 0=>
