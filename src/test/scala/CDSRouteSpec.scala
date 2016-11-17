@@ -11,7 +11,7 @@ import scala.xml.parsing.ConstructingParser
 class CDSRouteSpec extends FlatSpec with Matchers {
 
   "A CDS.CDSRoute" should "retrieve route name" in {
-    val src = Source.fromFile("src/test/resources/test.xml","utf8")
+    val src = Source.fromFile("src/test/resources/routes/test.xml","utf8")
     val parser = new ConstructingParser(src,true)
     parser.initialize
     val doc = parser.document()
