@@ -152,7 +152,13 @@ case class CDSRoute(name: String,routetype:String,methods:List[CDSMethod],config
     })
 
     runNextMethod(otherMethods.head,otherMethods.tail,FileCollection.fromOptionMap(optionMap,datastore.uri),shouldFail = true) match {
-      case (CDSReturnCode.FAILURE,Some(fc)) |(CDSReturnCode.UNKNOWN,Some(fc)) | (CDSReturnCode.STOPROUTE,Some(fc)) =>
+      case (CDSReturnCode.FAILURE,Some(fc)) =>
+        loggerCollection.error("Route failed. Executing failure methods",None)
+        runNextMethod(failMethods.head,failMethods.tail,fc,shouldFail = false)
+      case (CDSReturnCode.UNKNOWN,Some(fc))=>
+        loggerCollection.error("Route failed. Executing failure methods",None)
+        runNextMethod(failMethods.head,failMethods.tail,fc,shouldFail = false)
+      case (CDSReturnCode.STOPROUTE,Some(fc))=>
         loggerCollection.error("Route failed. Executing failure methods",None)
         runNextMethod(failMethods.head,failMethods.tail,fc,shouldFail = false)
       case (CDSReturnCode.SUCCESS,Some(fc))=>
