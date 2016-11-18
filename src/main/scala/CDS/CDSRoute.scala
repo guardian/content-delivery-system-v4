@@ -1,11 +1,12 @@
 package CDS
 
 import java.util.concurrent.TimeoutException
+import java.util.concurrent.Executors.newCachedThreadPool
 
 import logging.LogCollection
 import config.CDSConfig
 
-import scala.concurrent.{Await, Future}
+import scala.concurrent.{ExecutionContext, Await, Future}
 import scala.io.Source
 import scala.xml.{Elem, Node}
 import scala.xml.parsing.ConstructingParser
@@ -79,6 +80,9 @@ object CDSRoute {
 case class BatchModeException(methodRef:CDSMethod,fileCollection: FileCollection,code: CDSReturnCode.Value) extends RuntimeException
 
 case class CDSRoute(name: String,routetype:String,methods:List[CDSMethod],config:CDSConfig) {
+  /*define a thread pool within which routes can execute*/
+  implicit val ec:ExecutionContext = ExecutionContext.fromExecutor(newCachedThreadPool())
+
   def dump = {
     println("Got route name " + name + " (" + routetype + ")")
     methods.foreach(x=>{x.dump})
