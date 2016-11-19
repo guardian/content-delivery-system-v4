@@ -4,6 +4,9 @@ version := "1.0"
 
 scalaVersion := "2.11.8"
 
+packAutoSettings
+// mainClass in assembly := Some("mainclass")
+
 libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.0" % "test"
 
 // https://mvnrepository.com/artifact/org.scalamock/scalamock-core_2.11
