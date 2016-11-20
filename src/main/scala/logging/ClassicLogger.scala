@@ -1,5 +1,5 @@
 package logging
-import CDS.{CDSMethod, CDSRoute}
+import CDS.{CDSMethod, CDSReturnCode, CDSRoute}
 import java.io._
 
 import scala.concurrent.Future
@@ -19,10 +19,10 @@ class ClassicLogger(params: Map[String, String],routeName:String,routeType:Strin
     printwriter.write("CDS: executing " + newMethod.methodType + " " + newMethod.name)
   }
 
-  override def methodFinished(method: CDSMethod, success: Boolean, nonfatal: Boolean) = Future {
-    success match {
-      case true=>printwriter.write("CDS: " + method.methodType + " " + method.name + " returned successfully")
-      case false=>
+  override def methodFinished(method: CDSMethod, returnCode: CDSReturnCode.Value, nonfatal: Boolean) = Future {
+    returnCode match {
+      case CDSReturnCode.SUCCESS=>printwriter.write("CDS: " + method.methodType + " " + method.name + " returned successfully")
+      case _=>
         printwriter.write("CDS: " + method.methodType + " " + method.name + " FAILED")
         if(! nonfatal) printwriter.write("<nonfatal/> is set, so continuing.")
     }
@@ -34,6 +34,7 @@ class ClassicLogger(params: Map[String, String],routeName:String,routeType:Strin
         case Some(method)=>method.name
         case None=>"CDS"
       }
+      println(s"\t$methodName: $severity: $msg")
       printwriter.write(s"\t$methodName: $severity: $msg")
     }
 

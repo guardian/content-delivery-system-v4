@@ -1,5 +1,5 @@
 package logging
-import CDS.CDSMethod
+import CDS.{CDSMethod, CDSReturnCode}
 import org.apache.logging.log4j.LogManager
 
 import scala.concurrent.Future
@@ -35,5 +35,5 @@ class Log4jLogger(params:Map[String,String],routeName:String,routeType:String) e
 
   override def methodStarting(newMethod: CDSMethod)= Future {}
 
-  override def methodFinished(method: CDSMethod, success: Boolean, nonfatal: Boolean) = Future {}
+  override def methodFinished(method: CDSMethod, success: CDSReturnCode.Value, nonfatal: Boolean) = Future {}
 }

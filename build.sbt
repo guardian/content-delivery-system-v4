@@ -1,6 +1,6 @@
 name := "content-delivery-system-v4"
 
-version := "1.0"
+version := "4.0"
 
 scalaVersion := "2.11.8"
 

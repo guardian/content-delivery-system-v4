@@ -19,7 +19,7 @@ class CDSConfigSpec extends FlatSpec with Matchers {
 
   it should "provide the paths section as a map" in {
     val cfg = CDSConfig.load("src/test/resources/testconfig.yml","testspec")
-    cfg.paths.size should be (1)
+    cfg.paths.size should be (2)
     cfg.paths.get("methods") should be (Some("/usr/local/lib/cds_backend"))
     cfg.paths.get("invalid") should be (None)
   }

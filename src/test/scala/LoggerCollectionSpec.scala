@@ -1,8 +1,9 @@
 import logging.{LogCollection, LogMessage, Logger}
-import CDS.CDSMethod
+import CDS.{CDSMethod, CDSReturnCode}
 import config.CDSConfig
 import org.scalatest._
 import org.scalamock.scalatest.MockFactory
+
 import scala.concurrent.duration._
 import scala.concurrent.Future
 
@@ -109,16 +110,16 @@ class LoggerCollectionSpec extends FlatSpec with Matchers with MockFactory{
     val mthd = CDSMethod("test-method","stringtest",Seq(),Map(),collection,None,CDSConfig.placeholder(Map()))
 
     inAnyOrder {  //since these are called via Futures, they can happen in any order. Serialization is tested below.
-      (lg.methodFinished _).expects(mthd, true, false)
-      (lg.methodFinished _).expects(mthd, true, true)
-      (lg.methodFinished _).expects(mthd, false, true)
-      (lg.methodFinished _).expects(mthd, false, false)
+      (lg.methodFinished _).expects(mthd, CDSReturnCode.SUCCESS, false)
+      (lg.methodFinished _).expects(mthd, CDSReturnCode.SUCCESS, true)
+      (lg.methodFinished _).expects(mthd, CDSReturnCode.FAILURE, true)
+      (lg.methodFinished _).expects(mthd, CDSReturnCode.FAILURE, false)
     }
 
-    collection.methodFinished(mthd,success=true,nonfatal=false)
-    collection.methodFinished(mthd,success=true,nonfatal=true)
-    collection.methodFinished(mthd,success=false,nonfatal=false)
-    collection.methodFinished(mthd,success=false,nonfatal=true)
+    collection.methodFinished(mthd,success=CDSReturnCode.SUCCESS,nonfatal=false)
+    collection.methodFinished(mthd,success=CDSReturnCode.SUCCESS,nonfatal=true)
+    collection.methodFinished(mthd,success=CDSReturnCode.FAILURE,nonfatal=false)
+    collection.methodFinished(mthd,success=CDSReturnCode.FAILURE,nonfatal=true)
   }
 
   it should "allow waiting for log backend processes to complete" in {
@@ -128,10 +129,10 @@ class LoggerCollectionSpec extends FlatSpec with Matchers with MockFactory{
 
     inSequence {
       (lg.methodStarting _).expects(mthd)
-      (lg.methodFinished _).expects(mthd,true,false)
+      (lg.methodFinished _).expects(mthd,CDSReturnCode.SUCCESS,false)
     }
 
     collection.waitFor(collection.methodStarting(mthd),timeout=1.seconds)
-    collection.methodFinished(mthd,success=true,nonfatal=false)
+    collection.methodFinished(mthd,success=CDSReturnCode.SUCCESS,nonfatal=false)
   }
 }

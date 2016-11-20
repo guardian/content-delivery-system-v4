@@ -33,7 +33,7 @@ case class LoggerConfig(name: String, enabled: Boolean, params: Map[String,Strin
   }
 
   def makeInstance(routeName:String,routeType:String):Option[Logger] = {
-    println("INFO: Attempting to initialise logger " + name)
+    println(s"INFO: Attempting to initialise logger $name for route $routeName ($routeType)")
     try {
       val cstrct = Class.forName(name).getConstructors
 

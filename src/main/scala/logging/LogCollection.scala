@@ -1,10 +1,11 @@
 package logging
 
-import CDS.{CDSMethod, CDSRoute}
+import CDS.{CDSMethod, CDSReturnCode, CDSRoute}
+
 import scala.concurrent.ExecutionContext.Implicits.global
 import config.LoggerConfig
-import scala.concurrent.duration.Duration
 
+import scala.concurrent.duration.Duration
 import scala.concurrent.{Await, Future}
 
 object LogCollection {
@@ -33,7 +34,7 @@ case class LogCollection(activeLoggers:Seq[Logger]) {
 
   def methodStarting(newMethod: CDSMethod): Seq[Future[Unit]] =
     activeLoggers.map(x=>x.methodStarting(newMethod))
-  def methodFinished(method: CDSMethod, success: Boolean, nonfatal: Boolean): Seq[Future[Unit]] =
+  def methodFinished(method: CDSMethod, success: CDSReturnCode.Value, nonfatal: Boolean): Seq[Future[Unit]] =
     activeLoggers.map(x=>x.methodFinished(method,success,nonfatal))
 
   /* You _can_ call this to wait for the logging backends to finish their output, not recommended but hey */
