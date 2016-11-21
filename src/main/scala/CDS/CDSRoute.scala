@@ -52,7 +52,7 @@ object CDSRoute {
     val methodList = for {
       child <- x.nonEmptyChildren
       if !child.isAtom
-    } yield CDSMethod(
+    } yield CDSMethodScript(
       child.label,getMethodName(child),
       getFileRequirements(child),
       getMethodParams(child),
