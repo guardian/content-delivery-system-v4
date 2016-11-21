@@ -2,6 +2,7 @@ package logging
 import CDS.{CDSMethod, CDSReturnCode, CDSRoute}
 import java.io._
 import java.util.concurrent.Executors._
+import java.util.concurrent.TimeUnit
 
 import scala.concurrent.{Await, ExecutionContext, Future}
 import scala.concurrent.duration._
@@ -51,6 +52,7 @@ class ClassicLogger(params: Map[String, String],routeName:String,routeType:Strin
     Await.ready(Future {printwriter.close()},1.second)
     println("awaiting shutdown")
     pool.shutdownNow()
+    pool.awaitTermination(30,TimeUnit.SECONDS)
     println("done")
     true
   }
