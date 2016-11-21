@@ -178,6 +178,8 @@ case class CDSRoute(name: String,routetype:String,methods:List[CDSMethod],config
           runNextMethod(successMethods.head,successMethods.tail,fc,shouldFail = false)
 
     }
+
+    loggerCollection.teardown
     //methods.foreach(curMethod=>{curMethod.execute})
   }
 }

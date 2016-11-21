@@ -1,11 +1,15 @@
 package logging
 import CDS.{CDSMethod, CDSReturnCode, CDSRoute}
 import java.io._
+import java.util.concurrent.Executors._
 
-import scala.concurrent.Future
-import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.{Await, ExecutionContext, Future}
+import scala.concurrent.duration._
+//import scala.concurrent.ExecutionContext.Implicits.global
 
 class ClassicLogger(params: Map[String, String],routeName:String,routeType:String) extends Logger {
+  val pool = newSingleThreadExecutor()
+  implicit val ec:ExecutionContext = ExecutionContext.fromExecutor(pool)
   val safeRouteName = routeName.replaceAll("[^A-Za-z0-9]+","_")
   val format = new java.text.SimpleDateFormat("_yyyy-MM-dd_hhmmss")
   val logdir = params("basepath") + s"/$safeRouteName"
@@ -15,16 +19,16 @@ class ClassicLogger(params: Map[String, String],routeName:String,routeType:Strin
 
 
   override def methodStarting(newMethod: CDSMethod) = Future {
-    printwriter.write("---------------------------------------------------------")
-    printwriter.write("CDS: executing " + newMethod.methodType + " " + newMethod.name)
+    printwriter.write("---------------------------------------------------------\n")
+    printwriter.write("CDS: executing " + newMethod.methodType + " " + newMethod.name + "\n")
   }
 
   override def methodFinished(method: CDSMethod, returnCode: CDSReturnCode.Value, nonfatal: Boolean) = Future {
     returnCode match {
-      case CDSReturnCode.SUCCESS=>printwriter.write("CDS: " + method.methodType + " " + method.name + " returned successfully")
+      case CDSReturnCode.SUCCESS=>printwriter.write("CDS: " + method.methodType + " " + method.name + " returned successfully\n")
       case _=>
-        printwriter.write("CDS: " + method.methodType + " " + method.name + " FAILED")
-        if(! nonfatal) printwriter.write("<nonfatal/> is set, so continuing.")
+        printwriter.write("CDS: " + method.methodType + " " + method.name + " FAILED\n")
+        if(! nonfatal) printwriter.write("<nonfatal/> is set, so continuing.\n")
     }
 
   }
@@ -35,10 +39,19 @@ class ClassicLogger(params: Map[String, String],routeName:String,routeType:Strin
         case None=>"CDS"
       }
       println(s"\t$methodName: $severity: $msg")
-      printwriter.write(s"\t$methodName: $severity: $msg")
+      printwriter.write(s"\t$methodName: $severity: $msg\n")
     }
 
   override def datastoreUpdated(by: CDSMethod, values: Map[String, String]) = Future {}
 
-  override def teardown: Boolean = true
+  override def teardown: Boolean = {
+    /*wrapping this in a Furure when using the SingleThreadExecutor here
+    should ensure that everything is written before this is called */
+    println("awaiting teardown")
+    Await.ready(Future {printwriter.close()},1.second)
+    println("awaiting shutdown")
+    pool.shutdownNow()
+    println("done")
+    true
+  }
 }
