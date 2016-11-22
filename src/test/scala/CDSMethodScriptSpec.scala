@@ -34,6 +34,7 @@ class CDSMethodScriptSpec  extends FlatSpec with Matchers with MockFactory {
   it should "run a script and return success on status code of 0" in {
     val tempfile = File.createTempFile("cds_","_testfile.tmp")
     tempfile.createNewFile()
+    tempfile.deleteOnExit()
     val fc = FileCollection("","","","",new java.net.URI("file:///none"),tempfile.getAbsolutePath)
     val cfg = CDSConfig.placeholder(Map("methods"->SCRIPTDIR))
     val log = LogCollection(Seq())  //use an empty LogCollection
@@ -46,6 +47,7 @@ class CDSMethodScriptSpec  extends FlatSpec with Matchers with MockFactory {
   it should "run a script and return error on status code of 1" in {
     val tempfile = File.createTempFile("cds_","_testfile.tmp")
     tempfile.createNewFile()
+    tempfile.deleteOnExit()
     val fc = FileCollection("","","","",new java.net.URI("file:///none"),tempfile.getAbsolutePath)
     val cfg = CDSConfig.placeholder(Map("methods"->SCRIPTDIR))
     val log = LogCollection(Seq())  //use an empty LogCollection
@@ -57,6 +59,7 @@ class CDSMethodScriptSpec  extends FlatSpec with Matchers with MockFactory {
   it should "run a script and return stop-route on status code of 2" in {
     val tempfile = File.createTempFile("cds_","_testfile.tmp")
     tempfile.createNewFile()
+    tempfile.deleteOnExit()
     val fc = FileCollection("","","","",new java.net.URI("file:///none"),tempfile.getAbsolutePath)
     val cfg = CDSConfig.placeholder(Map("methods"->SCRIPTDIR))
     val log = LogCollection(Seq())  //use an empty LogCollection
@@ -68,6 +71,7 @@ class CDSMethodScriptSpec  extends FlatSpec with Matchers with MockFactory {
   it should "run a script and return unknown on other status code" in {
     val tempfile = File.createTempFile("cds_","_testfile.tmp")
     tempfile.createNewFile()
+    tempfile.deleteOnExit()
     val fc = FileCollection("","","","",new java.net.URI("file:///none"),tempfile.getAbsolutePath)
     val cfg = CDSConfig.placeholder(Map("methods"->SCRIPTDIR))
     val log = LogCollection(Seq())  //use an empty LogCollection
@@ -79,6 +83,7 @@ class CDSMethodScriptSpec  extends FlatSpec with Matchers with MockFactory {
   it should "set environment variables according to params for the method, and test script should echo them back" in {
     val tempfile = File.createTempFile("cds_","_testfile.tmp")
     tempfile.createNewFile()
+    tempfile.deleteOnExit()
     val fc = FileCollection("","","","",new java.net.URI("file:///none"),tempfile.getAbsolutePath)
     val cfg = CDSConfig.placeholder(Map("methods"->SCRIPTDIR))
     val lg = mock[Logger]
