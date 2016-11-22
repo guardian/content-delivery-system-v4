@@ -42,24 +42,39 @@ object CDSRoute {
     getMethodAttrib(n,"name").getOrElse("(no name)")
   }
 
-  def readRoute(x: Node,config:CDSConfig):CDSRoute = {
+  def readRoute(x: Node,config:CDSConfig,options:Map[Symbol,String]):CDSRoute = {
     /*
     this call is effectively a filter chain
     the first line in the block after for is what to iterate on
     each following line is a filter if it starts with "if" or a map otherwise
     then the yield is evaluated for the output of the filter chain.
      */
+//    val methodList = for {
+//      child <- x.nonEmptyChildren
+//      if !child.isAtom
+//    } yield CDSMethodScript(
+//      child.label,getMethodName(child),
+//      getFileRequirements(child),
+//      getMethodParams(child),
+//      /* using .get() here should be OK provided that routes are validated against the XSD before this method is called*/
+//      config.getLogCollection(getMethodAttrib(x,"name").getOrElse("(no name)"), getMethodAttrib(x,"type").get),
+//      config.datastore,
+//      config
+//    )
+
     val methodList = for {
       child <- x.nonEmptyChildren
       if !child.isAtom
-    } yield CDSMethodScript(
-      child.label,getMethodName(child),
-      getFileRequirements(child),
-      getMethodParams(child),
+    } yield CDSMethodFactory.newCDSMethod(
+      child.label, //method type
+      getMethodName(child), //method name
+      getFileRequirements(child), //file requirements
+      getMethodParams(child), //method parameters from route body
       /* using .get() here should be OK provided that routes are validated against the XSD before this method is called*/
-      config.getLogCollection(getMethodAttrib(x,"name").getOrElse("(no name)"), getMethodAttrib(x,"type").get),
-      config.datastore,
-      config
+      config.getLogCollection(getMethodAttrib(x,"name").getOrElse("(no name)"), getMethodAttrib(x,"type").get), //logger
+      config.datastore, //datastore
+      config, //configuration object
+      options
     )
 
     CDSRoute(getMethodAttrib(x,"name").getOrElse("(no name)"),
@@ -68,11 +83,11 @@ object CDSRoute {
       config)
   }
 
-  def fromFile(filename:String,config:CDSConfig) = {
+  def fromFile(filename:String,config:CDSConfig,options:Map[Symbol,String]) = {
     val src = Source.fromFile(filename,"utf8")
     val parser = ConstructingParser.fromSource(src,true)
 
-    readRoute(parser.document().docElem,config)
+    readRoute(parser.document().docElem,config,options)
   }
 }
 
@@ -102,7 +117,9 @@ case class CDSRoute(name: String,routetype:String,methods:List[CDSMethod],config
 
       loggerCollection.methodStarting(methodRef)
 
-      val r = methodRef.execute(fc)
+      val rtuple = methodRef.execute(fc)
+      val r=rtuple._1
+      val fcList = rtuple._2
       loggerCollection.methodFinished(methodRef,r,nonfatal)
       r match {
         case CDSReturnCode.NOTFOUND=>
@@ -119,7 +136,6 @@ case class CDSRoute(name: String,routetype:String,methods:List[CDSMethod],config
           if(shouldFail && !nonfatal) return (CDSReturnCode.UNKNOWN,Some(fc))
       }
 
-      val fcList = FileCollection.fromTempFile(fc.tempFile, Some(fc), None)
       if(reminaingMethods.nonEmpty) {
         /*f(fcList.length==1)
           runNextMethod(reminaingMethods.head, reminaingMethods.tail, fcList.head, shouldFail)

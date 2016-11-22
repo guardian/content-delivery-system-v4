@@ -14,7 +14,7 @@ class ClassicLogger(params: Map[String, String],routeName:String,routeType:Strin
   val safeRouteName = routeName.replaceAll("[^A-Za-z0-9]+","_")
   val format = new java.text.SimpleDateFormat("_yyyy-MM-dd_hhmmss")
   val logdir = params("basepath") + s"/$safeRouteName"
-  val filename = s"/cds_$safeRouteName" + format.format(new java.util.Date())
+  val filename = s"/cds_$safeRouteName" + format.format(new java.util.Date()) + ".log"
   new File(logdir).mkdirs()
   val printwriter = new PrintWriter(new File(logdir + filename))
 

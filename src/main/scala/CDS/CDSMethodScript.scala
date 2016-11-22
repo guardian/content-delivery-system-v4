@@ -28,28 +28,29 @@ case class CDSMethodScript(methodType: String,
     }
   }
 
-  def execute(fileCollection: FileCollection):CDSReturnCode.Value = {
+  def execute(fileCollection: FileCollection):(CDSReturnCode.Value,List[FileCollection]) = {
     log.log("Executing method " + name + " as " + methodType,Some(this))
 
     findFile match {
       case None=>
         log.error("Could not find executable for "+name+" in "+ METHODS_BASE_PATH,None)
-        CDSReturnCode.NOTFOUND
+        (CDSReturnCode.NOTFOUND,List(fileCollection))
       case Some(path)=>
         val p = runCommand(path.toString,Seq(),params ++ fileCollection.getEnvironmentMap(requiredFiles))
+        val fcList = FileCollection.fromTempFile(fileCollection.tempFile, Some(fileCollection), None)
         p.exitValue() match {
           case 0=>
             log.log("Method exited cleanly",Some(this))
-            CDSReturnCode.SUCCESS
+            (CDSReturnCode.SUCCESS,fcList)
           case 1=>
             log.warn("Method executed with failure",Some(this))
-            CDSReturnCode.FAILURE
+            (CDSReturnCode.FAILURE,fcList)
           case 2=>
             log.warn("Method failed and signalled to stop block process",Some(this))
-            CDSReturnCode.STOPROUTE
+            (CDSReturnCode.STOPROUTE,fcList)
           case _=>
             log.error("Method returned a non-standard failure code",Some(this))
-            CDSReturnCode.UNKNOWN
+            (CDSReturnCode.UNKNOWN,fcList)
         }
     }
 

@@ -44,7 +44,7 @@ trait CDSMethod {
     }
   }
 
-  def execute(fileCollection: FileCollection):CDSReturnCode.Value
+  def execute(fileCollection: FileCollection):(CDSReturnCode.Value,List[FileCollection])
 
   def dump = { /*print out info to stdout */
     println("Method:")
@@ -62,11 +62,12 @@ object CDSMethodFactory {
     params: Map[String,String],
     log:LogCollection,
     store:Option[Datastore],
-    config: CDSConfig) = {
+    config: CDSConfig,
+                   options:Map[Symbol,String]) = {
 
     /*simple check from internally implemented pseudo-methods.*/
     name match {
-      case "commandline"=>CDSMethodInternalCommandline(methodType,name,requiredFiles,params,log,store,config)
+      case "commandline"=>CDSMethodInternalCommandline(methodType,name,requiredFiles,params,log,store,config,options)
       case _=>CDSMethodScript(methodType,name,requiredFiles,params,log,store,config)
     }
   }

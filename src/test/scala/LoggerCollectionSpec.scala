@@ -1,5 +1,5 @@
 import logging.{LogCollection, LogMessage, Logger}
-import CDS.{CDSMethod, CDSReturnCode}
+import CDS.{CDSMethod, CDSMethodScript, CDSReturnCode}
 import config.CDSConfig
 import org.scalatest._
 import org.scalamock.scalatest.MockFactory
@@ -97,7 +97,7 @@ class LoggerCollectionSpec extends FlatSpec with Matchers with MockFactory{
   it should "pass a Method Starting message to the log backend" in {
     val lg = mock[Logger]
     val collection = LogCollection(List(lg))
-    val mthd = CDSMethod("test-method","stringtest",Seq(),Map(),collection,None,CDSConfig.placeholder(Map()))
+    val mthd = CDSMethodScript("test-method","stringtest",Seq(),Map(),collection,None,CDSConfig.placeholder(Map()))
 
     (lg.methodStarting _).expects(mthd)
 
@@ -107,7 +107,7 @@ class LoggerCollectionSpec extends FlatSpec with Matchers with MockFactory{
   it should "pass a Method Finished message to the log backend, preserving flags" in {
     val lg = mock[Logger]
     val collection = LogCollection(List(lg))
-    val mthd = CDSMethod("test-method","stringtest",Seq(),Map(),collection,None,CDSConfig.placeholder(Map()))
+    val mthd = CDSMethodScript("test-method","stringtest",Seq(),Map(),collection,None,CDSConfig.placeholder(Map()))
 
     inAnyOrder {  //since these are called via Futures, they can happen in any order. Serialization is tested below.
       (lg.methodFinished _).expects(mthd, CDSReturnCode.SUCCESS, false)
@@ -125,7 +125,7 @@ class LoggerCollectionSpec extends FlatSpec with Matchers with MockFactory{
   it should "allow waiting for log backend processes to complete" in {
     val lg = mock[Logger]
     val collection = LogCollection(List(lg))
-    val mthd = CDSMethod("test-method","stringtest",Seq(),Map(),collection,None,CDSConfig.placeholder(Map()))
+    val mthd = CDSMethodScript("test-method","stringtest",Seq(),Map(),collection,None,CDSConfig.placeholder(Map()))
 
     inSequence {
       (lg.methodStarting _).expects(mthd)

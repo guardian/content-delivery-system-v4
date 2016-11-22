@@ -74,7 +74,7 @@ val usage =
       case e:RuntimeException=>
         logcollection.error(s"Unable to initialise datastore: ${e.getMessage}",None)
     }
-    val route = CDSRoute.fromFile(options('routename), config)
+    val route = CDSRoute.fromFile(options('routename), config, options)
     route.dump
     route.runRoute(options)
 
