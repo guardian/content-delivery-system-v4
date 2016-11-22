@@ -36,6 +36,9 @@ case class CDSMethodScript(methodType: String,
         log.error("Could not find executable for "+name+" in "+ METHODS_BASE_PATH,None)
         (CDSReturnCode.NOTFOUND,List(fileCollection))
       case Some(path)=>
+        if(! fileCollection.hasFiles(requiredFiles)){
+          log.error(s"Unable to execute method, some required files ($requiredFiles) are not available",Some(this))
+        }
         val p = runCommand(path.toString,Seq(),params ++ fileCollection.getEnvironmentMap(requiredFiles))
         val fcList = FileCollection.fromTempFile(fileCollection.tempFile, Some(fileCollection), None)
         p.exitValue() match {

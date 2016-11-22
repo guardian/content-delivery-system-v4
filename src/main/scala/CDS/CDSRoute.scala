@@ -134,6 +134,8 @@ case class CDSRoute(name: String,routetype:String,methods:List[CDSMethod],config
         case CDSReturnCode.UNKNOWN=>
           loggerCollection.error(s"Method ${methodRef.name} returned an unknown status. Treating it as a failure.",None)
           if(shouldFail && !nonfatal) return (CDSReturnCode.UNKNOWN,Some(fc))
+        case _=>
+
       }
 
       if(reminaingMethods.nonEmpty) {

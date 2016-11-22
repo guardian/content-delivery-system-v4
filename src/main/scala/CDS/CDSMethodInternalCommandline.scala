@@ -14,9 +14,17 @@ case class CDSMethodInternalCommandline(methodType: String,
                                         options: Map[Symbol,String]) extends CDSMethod {
   override def execute(fileCollection: FileCollection): (CDSReturnCode.Value,List[FileCollection]) = {
     try {
-      (CDSReturnCode.SUCCESS, List(FileCollection.fromOptionMap(options, store.get.uri)))
+      val newfc = FileCollection.fromOptionMap(options, store.get.uri)
+      log.log(s"Setting up the following files",Some(this))
+      log.log(s"\tMedia: ${newfc.mediaFile}",Some(this))
+      log.log(s"\tInMeta: ${newfc.inmetaFile}",Some(this))
+      log.log(s"\tMeta: ${newfc.metaFile}",Some(this))
+      log.log(s"\tXML: ${newfc.xmlFile}",Some(this))
+      (CDSReturnCode.SUCCESS, List(newfc))
     } catch {
-      case e:Throwable=>
+      case e:Throwable=>  //log errors out to the log(s), return a failure
+        log.error(e.getMessage,Some(this))
+        log.error(e.getStackTrace.toString,Some(this))
         (CDSReturnCode.FAILURE,List())
     }
   }
