@@ -57,7 +57,7 @@ case class CDSMethod(methodType: String,
         log.error("Could not find executable for "+name+" in "+ METHODS_BASE_PATH,None)
         CDSReturnCode.NOTFOUND
       case Some(path)=>
-        val p = runCommand(path.toString,Seq())
+        val p = runCommand(path.toString,Seq(),params)
         p.exitValue() match {
           case 0=>
             log.log("Method exited cleanly",Some(this))
