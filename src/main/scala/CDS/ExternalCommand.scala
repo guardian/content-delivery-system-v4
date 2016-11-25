@@ -8,12 +8,11 @@ trait ExternalCommand {
   def outputHandler(input: java.io.InputStream) = {}
   def errHandler(input: java.io.InputStream) = {}
 
-  def runCommand(scriptpath:String,args:Seq[String]):Boolean = {
+  def runCommand(scriptpath:String,args:Seq[String]):Process = {
     val cmd:Seq[String]= scriptpath +: args
 
     val process = Process(scriptpath)
     process run new ProcessIO(_.close(),outputHandler,errHandler)
-    true
   }
 
 }

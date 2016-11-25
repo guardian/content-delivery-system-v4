@@ -2,47 +2,78 @@ package CDS
 
 import java.io.InputStream
 
+import logging.LogMessage
 import logging.LogCollection
 import java.nio.file.{Files, Path, Paths}
 
+import datastore.Datastore
 import config.CDSConfig
 
-case class CDSMethod(methodType: String, name:String, requiredFiles: Seq[String], params: Map[String,String],log:LogCollection) extends ExternalCommand {
-  val METHODS_BASE_PATH = "/usr/local/lib/cds_backend"
+import scala.io.Source
 
-  def findFile:Option[Path] = {
-    val extensions = List("",".rb",".pl",".py",".js")
+object CDSReturnCode extends Enumeration {
+  val SUCCESS, NOTFOUND, FAILURE, STOPROUTE, UNKNOWN = Value
+}
+
+case class CDSMethod(methodType: String,
+                     name:String,
+                     requiredFiles: Seq[String],
+                     params: Map[String,String],
+                     log:LogCollection,
+                     store:Option[Datastore],
+                     config: CDSConfig)
+    extends ExternalCommand {
+
+  val METHODS_BASE_PATH = config.paths.getOrElse("methods","/usr/local/lib/cds_backend")
+
+  def findFile:Option[String] = {
+    val extensions = List("",".rb",".pl",".py",".js",".sh")
 
     val filesList = extensions
       .map(xtn=>Paths.get(METHODS_BASE_PATH,name + xtn))
       .filter(path=>Files.exists(path))
-    filesList.length match {
-      case 0=>None
-      case 1=>Some(filesList.head)
-      case _=>
-        log.warn("Multiple methods found for " + name + ":" + filesList,null)
-        Some(filesList.head)
-    }
+
+    if(filesList.length>1) log.warn("Multiple methods found for " + name + ":" + filesList,null)
+    filesList.headOption.map(_.toString) //headOption gives an option with Some(value) if has item or None if empty
   }
 
   override def errHandler(input: InputStream): Unit = {
-
+    for(line <- Source.fromInputStream(input).getLines()){
+      log.relayMessage(LogMessage.fromString(line,Some(this)))
+    }
   }
+
   override def outputHandler(input: InputStream): Unit = {
-
+    for(line <- Source.fromInputStream(input).getLines()){
+      log.relayMessage(LogMessage.fromString(line,Some(this)))
+    }
   }
 
-  def execute:Boolean = {
-    log.log("Executing method " + name + " as " + methodType,this)
+  def execute:CDSReturnCode.Value = {
+    log.log("Executing method " + name + " as " + methodType,Some(this))
 
     findFile match {
-        //fixme: replace param with Option so can use None instead of null
-      case None=>log.error("Could not find executable for "+name+" in "+ METHODS_BASE_PATH,null)
+      case None=>
+        log.error("Could not find executable for "+name+" in "+ METHODS_BASE_PATH,None)
+        CDSReturnCode.NOTFOUND
       case Some(path)=>
-        runCommand(path.toString,Seq())
+        val p = runCommand(path.toString,Seq())
+        p.exitValue() match {
+          case 0=>
+            log.log("Method exited cleanly",Some(this))
+            CDSReturnCode.SUCCESS
+          case 1=>
+            log.warn("Method executed with failure",Some(this))
+            CDSReturnCode.FAILURE
+          case 2=>
+            log.warn("Method failed and signalled to stop block process",Some(this))
+            CDSReturnCode.STOPROUTE
+          case _=>
+            log.error("Method returned a non-standard failure code",Some(this))
+            CDSReturnCode.UNKNOWN
+        }
     }
-    log.error("This method has not yet been implemented!", this)
-    false
+
   }
 
   def dump = { /*print out info to stdout */

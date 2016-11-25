@@ -45,11 +45,24 @@ val usage =
     val options = nextOption(Map(),args.toList)
 
     val config = if(options.contains('config)) {
-      CDSConfig.load(options('config))
+      CDSConfig.load(options('config),options('routename))
     } else {
-      CDSConfig.load("src/test/resources/testconfig.yml")
+      CDSConfig.load("src/test/resources/testconfig.yml",options('routename))
     }
-    val route=CDSRoute.fromFile(options('routename),config)
+
+    val logcollection = config.getLogCollection("(core)","")
+    try {
+      val storeOption = config.datastore
+      storeOption match {
+        case Some(store)=>store.createNewDatastore (Map())
+        case None=>
+          logcollection.error(s"No datastore was loaded, so we couldn't initialise.  Expect problems.",None)
+      }
+    } catch {
+      case e:RuntimeException=>
+        logcollection.error(s"Unable to initialise datastore: ${e.getMessage}",None)
+    }
+    val route = CDSRoute.fromFile(options('routename), config)
     route.dump
   }
 }

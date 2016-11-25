@@ -14,12 +14,12 @@ class ClassicLogger(params: Map[String, String],routeName:String,routeType:Strin
   val printwriter = new PrintWriter(new File(logdir + filename))
 
 
-  override def methodStarting(newMethod: CDSMethod): Unit = Future {
+  override def methodStarting(newMethod: CDSMethod) = Future {
     printwriter.write("---------------------------------------------------------")
     printwriter.write("CDS: executing " + newMethod.methodType + " " + newMethod.name)
   }
 
-  override def methodFinished(method: CDSMethod, success: Boolean, nonfatal: Boolean): Unit = Future {
+  override def methodFinished(method: CDSMethod, success: Boolean, nonfatal: Boolean) = Future {
     success match {
       case true=>printwriter.write("CDS: " + method.methodType + " " + method.name + " returned successfully")
       case false=>
@@ -29,10 +29,15 @@ class ClassicLogger(params: Map[String, String],routeName:String,routeType:Strin
 
   }
 
-  override def relayMessage(msg: String, curMethod: CDSMethod, severity: String): Unit =
-    Future { printwriter.write("\t" + curMethod.name + s": $severity: $msg") }
+  override def relayMessage(msg: String, curMethod: Option[CDSMethod], severity: String) = Future {
+      val methodName = curMethod match {
+        case Some(method)=>method.name
+        case None=>"CDS"
+      }
+      printwriter.write(s"\t$methodName: $severity: $msg")
+    }
 
-  override def datastoreUpdated(by: CDSMethod, values: Map[String, String]): Unit = {}
+  override def datastoreUpdated(by: CDSMethod, values: Map[String, String]) = Future {}
 
   override def teardown: Boolean = true
 }
