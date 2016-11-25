@@ -32,13 +32,13 @@ case class LogCollection(activeLoggers:Seq[Logger]) {
   def warn(msg:String,curMethod:Option[CDSMethod]) = relayMessage(LogMessage(msg,"warning",curMethod))
 
   def methodStarting(newMethod: CDSMethod): Seq[Future[Unit]] =
-    activeLoggers.map(x=>x.methodStarting(newMethod))
+    activeLoggers.map(_.methodStarting(newMethod))
   def methodFinished(method: CDSMethod, success: Boolean, nonfatal: Boolean): Seq[Future[Unit]] =
-    activeLoggers.map(x=>x.methodFinished(method,success,nonfatal))
+    activeLoggers.map(_.methodFinished(method,success,nonfatal))
 
   /* You _can_ call this to wait for the logging backends to finish their output, not recommended but hey */
   def waitFor(futures:Seq[Future[Unit]],timeout:Duration) = Await.ready(Future.sequence(futures),timeout)
 
-  def teardown:Unit = activeLoggers.foreach(x=>x.teardown)
+  def teardown:Unit = activeLoggers.foreach(_.teardown)
 
 }

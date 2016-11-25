@@ -24,10 +24,7 @@ case class CDSMethod(methodType: String,
                      config: CDSConfig)
     extends ExternalCommand {
 
-  val METHODS_BASE_PATH = config.paths.get("methods") match {
-    case Some(path)=>path
-    case None=>"/usr/local/lib/cds_backend"
-  }
+  val METHODS_BASE_PATH = config.paths.getOrElse("methods","/usr/local/lib/cds_backend")
 
   def findFile:Option[String] = {
     val extensions = List("",".rb",".pl",".py",".js",".sh")
@@ -35,13 +32,9 @@ case class CDSMethod(methodType: String,
     val filesList = extensions
       .map(xtn=>Paths.get(METHODS_BASE_PATH,name + xtn))
       .filter(path=>Files.exists(path))
-    filesList.length match {
-      case 0=>None
-      case 1=>Some(filesList.head.toString)
-      case _=>
-        log.warn("Multiple methods found for " + name + ":" + filesList,null)
-        Some(filesList.head.toString)
-    }
+
+    if(filesList.length>1) log.warn("Multiple methods found for " + name + ":" + filesList,null)
+    filesList.headOption.map(_.toString) //headOption gives an option with Some(value) if has item or None if empty
   }
 
   override def errHandler(input: InputStream): Unit = {
