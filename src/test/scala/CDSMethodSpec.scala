@@ -1,11 +1,13 @@
 import org.scalatest.{FlatSpec, Matchers}
-import CDS.{CDSMethod,CDSReturnCode}
+import CDS.{CDSMethod, CDSReturnCode}
 import config.CDSConfig
-import logging.LogCollection
+import logging.{LogCollection, LogMessage, Logger}
 import java.nio.file.Path
 
 import scala.io
 import org.scalamock.scalatest.MockFactory
+
+import scala.concurrent.Future
 
 class CDSMethodSpec  extends FlatSpec with Matchers with MockFactory {
   val SCRIPTDIR = "src/test/resources/scripts"
@@ -63,5 +65,21 @@ class CDSMethodSpec  extends FlatSpec with Matchers with MockFactory {
 
     val m = CDSMethod("test-method","testunknown",Seq(),Map(),log,None,cfg)
     m.execute should be (CDSReturnCode.UNKNOWN)
+  }
+
+  it should "set environment variables according to params for the method, and test script should echo them back" in {
+    val cfg = CDSConfig.placeholder(Map("methods"->SCRIPTDIR))
+    val lg = mock[Logger]
+    val log = LogCollection(Seq(lg))
+
+    val m = CDSMethod("test-method","envtest",Seq(),Map("key1"->"value1","key2"->"value2"),log,None,cfg)
+    (lg.relayMessage _:LogMessage=>Future[Unit]).expects(LogMessage("Executing method envtest as test-method","info",Some(m)))
+    (lg.relayMessage _:LogMessage=>Future[Unit]).expects(LogMessage("Testing passed environment","info",Some(m)))
+    (lg.relayMessage _:LogMessage=>Future[Unit]).expects(LogMessage("key1 => value1","info",Some(m)))
+    (lg.relayMessage _:LogMessage=>Future[Unit]).expects(LogMessage("key2 => value2","info",Some(m)))
+    (lg.relayMessage _:LogMessage=>Future[Unit]).expects(LogMessage("keyInval => ","info",Some(m)))
+    (lg.relayMessage _:LogMessage=>Future[Unit]).expects(LogMessage("Method exited cleanly","info",Some(m)))
+    m.execute should be (CDSReturnCode.SUCCESS)
+
   }
 }
