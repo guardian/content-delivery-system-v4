@@ -1,11 +1,15 @@
 package CDS
 
+import java.util.concurrent.TimeoutException
+
 import logging.LogCollection
 import config.CDSConfig
 
+import scala.concurrent.{Await, Future}
 import scala.io.Source
 import scala.xml.{Elem, Node}
 import scala.xml.parsing.ConstructingParser
+import scala.concurrent.duration._
 
 /**
   * Created by localhome on 21/10/2016.
@@ -60,7 +64,7 @@ object CDSRoute {
 
     CDSRoute(getMethodAttrib(x,"name").getOrElse("(no name)"),
       getMethodAttrib(x,"type").get,
-      methodList,
+      methodList.toList,
       config)
   }
 
@@ -72,13 +76,37 @@ object CDSRoute {
   }
 }
 
-case class CDSRoute(name: String,routetype:String,methods:Seq[CDSMethod],config:CDSConfig) {
+case class CDSRoute(name: String,routetype:String,methods:List[CDSMethod],config:CDSConfig) {
   def dump = {
     println("Got route name " + name + " (" + routetype + ")")
     methods.foreach(x=>{x.dump})
   }
 
-  def runRoute(loggerCollection:LogCollection) = {
-    methods.foreach(curMethod=>{curMethod.execute})
+  def runRoute(loggerCollection:LogCollection,optionMap:Map[Symbol,String]):Unit = {
+    val datastore = config.datastore.get
+
+    try {
+      Await.ready(datastore.createNewDatastore(Map()), 1.seconds)
+    } catch {
+      case e:TimeoutException=>
+        loggerCollection.error("Unable to set up datastore - create operation timed out",None)
+        return
+    }
+
+    def runNextMethod(methodRef:CDSMethod,reminaingMethods:List[CDSMethod],previousFileCollection:FileCollection):CDSReturnCode.Value = {
+      val fc=previousFileCollection
+      val r = methodRef.execute(fc)
+      if(reminaingMethods.nonEmpty) {
+        val fcList = FileCollection.fromTempFile(fc.tempFile, Some(fc), None)
+        if(fcList.length==1)
+          runNextMethod(reminaingMethods.head, reminaingMethods.tail, fcList.head)
+        else
+          loggerCollection.error("Batch mode is not supported yet I'm afraid",None)
+      }
+      r
+    }
+
+    runNextMethod(methods.head,methods.tail,FileCollection.fromOptionMap(optionMap,datastore.uri))
+    //methods.foreach(curMethod=>{curMethod.execute})
   }
 }
