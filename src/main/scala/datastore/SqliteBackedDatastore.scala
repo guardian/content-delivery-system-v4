@@ -19,6 +19,7 @@ class SqliteBackedDatastore(params:Map[String,String]) extends Datastore {
 
   override def createNewDatastore(params: Map[String, String]):Future[Boolean] = Future({
     val db = DriverManager.getConnection(s"jdbc:sqlite:$databasePath")
+    println(s"database path is $databasePath")
     val st = db.createStatement()
     st.setQueryTimeout(30)
 
@@ -30,15 +31,14 @@ class SqliteBackedDatastore(params:Map[String,String]) extends Datastore {
       st.executeUpdate("CREATE TABLE tracks (id integer primary key autoincrement,source_id,track_index,key,value)")
       st.executeUpdate("CREATE TABLE media (id integer primary key autoincrement,source_id,key,value)")
       st.executeUpdate("INSERT INTO system (schema_version,cds_version) VALUES (1.0,4.0)")
-      succeeded = true
-    } catch {
-      case e:SQLException=>
-        println("Unable to set up datastore: " +e)
-        succeeded = false
-    } finally {
       db.close()
+      true
+    } catch {
+      case e: SQLException =>
+        println("Unable to set up datastore: " + e)
+        db.close()
+        throw e
     }
-    succeeded
   })
 
   override def uri: URI = {
@@ -76,7 +76,6 @@ class SqliteBackedDatastore(params:Map[String,String]) extends Datastore {
 
   override def setMulti(section: String, params: Map[String, String], whoami:String): Future[List[Boolean]] = Future {
     val db = DriverManager.getConnection(s"jdbc:sqlite:$databasePath")
-    var result = List()
     try {
       db.setAutoCommit(false)
       val sourceId = getSourceIdSync(whoami, "cds")
@@ -89,9 +88,9 @@ class SqliteBackedDatastore(params:Map[String,String]) extends Datastore {
           None
       }
 
-      val result = maybeSt match {
+      maybeSt match {
         case Some(st) =>
-          val result = params.map(kvtuple =>
+          params.map(kvtuple =>
             try {
               st.setInt(1, sourceId)
               st.setString(2, kvtuple._1)
@@ -108,19 +107,21 @@ class SqliteBackedDatastore(params:Map[String,String]) extends Datastore {
                 false
             }
           ).toList
-          db.commit()
         case None=>
           List()
       }
-    } finally {
-      db.close()
+    } catch {
+      case e:SQLException=>
+        db.close()
+        throw e
     }
-    result
+
   }
 
 
   override def getMulti(section: String, keys: List[String]): Future[Map[String, String]] = Future {
     val db = DriverManager.getConnection(s"jdbc:sqlite:$databasePath")
+    println(s"database path is $databasePath")
     try {
       val st = db.prepareStatement("SELECT value from meta where key=?")
 
