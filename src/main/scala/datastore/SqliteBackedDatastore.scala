@@ -9,30 +9,63 @@ import java.net.URI
 /**
   * Created by localhome on 27/10/2016.
   */
+object DatabaseOperation{
+  def apply(databasePath:String, operationBlock: (Connection)=> Future[Option[AnyVal]], failureBlock: (Exception, Connection)=> Unit):Future[Option[AnyVal]] = Future[Option[AnyVal]] {
+    val db = DriverManager.getConnection(s"jdbc:sqlite:$databasePath")
+    try {
+      return operationBlock(db)
+    } catch {
+      case e: Exception =>
+        failureBlock(e,db)
+        return Future(None)
+    }
+  }
+}
+
 class SqliteBackedDatastore(params:Map[String,String]) extends Datastore {
   val databasePath = params("databasepath") + "/" + params("routename") + ".db"
 
-  override def createNewDatastore(params: Map[String, String]) = Future[Boolean] {
-    val db = DriverManager.getConnection(s"jdbc:sqlite:$databasePath")
-    val st = db.createStatement()
-    st.setQueryTimeout(30)
+  override def createNewDatastore(params: Map[String, String]) = DatabaseOperation(databasePath, { db=>
+    Future({
+      val st = db.createStatement()
+      st.setQueryTimeout(30)
 
-    try {
       st.executeUpdate("CREATE TABLE sources (id integer primary key autoincrement,type,provider_method,ctime,filename,filepath)")
       st.executeUpdate("CREATE TABLE meta (id integer primary key autoincrement,source_id,key,value)")
       st.executeUpdate("CREATE TABLE system (schema_version,cds_version)")
       st.executeUpdate("CREATE TABLE tracks (id integer primary key autoincrement,source_id,track_index,key,value)")
       st.executeUpdate("CREATE TABLE media (id integer primary key autoincrement,source_id,key,value)")
       st.executeUpdate("INSERT INTO system (schema_version,cds_version) VALUES (1.0,4.0)")
-      true
-    } catch {
-      case e:SQLException=>
-        println("Unable to set up datastore: " +e)
-        false
-    } finally {
       db.close()
-    }
-  }
+      Some(true)
+    })
+  },{ (e:Exception, db:Connection)=>
+        println("Unable to set up datastore: " + e)
+        db.close()
+    })
+
+//
+//    override def createNewDatastore(params: Map[String, String]) = Future[Boolean] {
+//      val db = DriverManager.getConnection(s"jdbc:sqlite:$databasePath")
+//      val st = db.createStatement()
+//      st.setQueryTimeout(30)
+//
+//      try {
+//        st.executeUpdate("CREATE TABLE sources (id integer primary key autoincrement,type,provider_method,ctime,filename,filepath)")
+//        st.executeUpdate("CREATE TABLE meta (id integer primary key autoincrement,source_id,key,value)")
+//        st.executeUpdate("CREATE TABLE system (schema_version,cds_version)")
+//        st.executeUpdate("CREATE TABLE tracks (id integer primary key autoincrement,source_id,track_index,key,value)")
+//        st.executeUpdate("CREATE TABLE media (id integer primary key autoincrement,source_id,key,value)")
+//        st.executeUpdate("INSERT INTO system (schema_version,cds_version) VALUES (1.0,4.0)")
+//        db.close()
+//        true
+//      } catch {
+//        case e: SQLException =>
+//          println("Unable to set up datastore: " + e)
+//          db.close()
+//          false
+//      }
+//  }
 
   override def uri: URI = {
     new URI("file://" + databasePath)
@@ -64,8 +97,11 @@ class SqliteBackedDatastore(params:Map[String,String]) extends Datastore {
           db.close()
           r
       }
-    } finally {
-      db.close()
+    } catch {
+      case e: SQLException =>
+        println("Database error: " + e)
+        db.close()
+        throw e
     }
   }
 
