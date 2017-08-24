@@ -23,6 +23,14 @@ case class FileCollection(mediaFile:String,inmetaFile:String,metaFile:String,xml
     FileCollection(newMediaFile,newInmetaFile,newMetaFile,newXmlFile,dsLocation,tempFile)
   }
 
+  def hasFiles(requiredFiles:Seq[String]):Boolean = {
+    if(requiredFiles.contains("media") && mediaFile=="") return false
+    if(requiredFiles.contains("inmeta") && inmetaFile=="") return false
+    if(requiredFiles.contains("meta") && metaFile=="") return false
+    if(requiredFiles.contains("xml") && xmlFile=="") return false
+    true
+  }
+
   def close:Boolean = {
     try {
       val f = new java.io.File(tempFile)
@@ -68,8 +76,8 @@ object FileCollection {
 
     FileCollection(
       optionMap.getOrElse('media,""),
-      optionMap.getOrElse('meta,""),
       optionMap.getOrElse('inmeta,""),
+      optionMap.getOrElse('meta,""),
       optionMap.getOrElse('xml,""),
       datastoreLocation,
       newtempfile.getAbsolutePath

@@ -1,5 +1,6 @@
 package logging
 import CDS.CDSMethod
+import CDS.CDSReturnCode
 
 import scala.concurrent.Future
 
@@ -11,7 +12,7 @@ trait Logger {
 
   def methodStarting(newMethod:CDSMethod):Future[Unit]
 
-  def methodFinished(method:CDSMethod,success:Boolean,nonfatal:Boolean):Future[Unit]
+  def methodFinished(method:CDSMethod,success:CDSReturnCode.Value,nonfatal:Boolean):Future[Unit]
 
   def log(msg:String,curMethod:Option[CDSMethod]) = relayMessage(msg,curMethod,"log")
   def debug(msg:String,curMethod:Option[CDSMethod]) = relayMessage(msg,curMethod,"debug")

@@ -12,3 +12,4 @@ datastore:
   databasepath: /tmp
 paths:
   methods: /usr/local/lib/cds_backend
+  routes: /etc/cds_backend/routes

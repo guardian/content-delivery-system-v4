@@ -3,6 +3,7 @@ import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
 import java.sql._
 import java.net.URI
+import java.io.File
 
 /*https://bitbucket.org/xerial/sqlite-jdbc*/
 
@@ -10,7 +11,11 @@ import java.net.URI
   * Created by localhome on 27/10/2016.
   */
 class SqliteBackedDatastore(params:Map[String,String]) extends Datastore {
-  val databasePath = params("databasepath") + "/" + params("routename") + ".db"
+  val safeRouteName = params("routename").replaceAll("[^A-Za-z0-9]+","_")
+  val format = new java.text.SimpleDateFormat("_yyyy-MM-dd_hhmmss")
+  val filename = s"/cds_$safeRouteName" + format.format(new java.util.Date()) + "_store.db"
+
+  val databasePath = params("databasepath") + filename
 
   override def createNewDatastore(params: Map[String, String]):Future[Boolean] = Future({
     val db = DriverManager.getConnection(s"jdbc:sqlite:$databasePath")
@@ -39,8 +44,6 @@ class SqliteBackedDatastore(params:Map[String,String]) extends Datastore {
   override def uri: URI = {
     new URI("file://" + databasePath)
   }
-
-  override def close(): Unit = {}
 
   def getSourceIdSync(whoami:String,mytype:String):Integer = {
     val db = DriverManager.getConnection(s"jdbc:sqlite:$databasePath")
@@ -130,5 +133,10 @@ class SqliteBackedDatastore(params:Map[String,String]) extends Datastore {
     } finally {
       db.close()
     }
+  }
+
+  override def close = {
+    val f = new File(databasePath)
+    f.deleteOnExit()
   }
 }

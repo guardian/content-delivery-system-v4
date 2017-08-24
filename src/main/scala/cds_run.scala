@@ -7,8 +7,9 @@ import config.CDSConfig
 import scala.xml.parsing.ConstructingParser
 import scala.io.Source
 import scala.xml.Node
+import scala.concurrent.duration._
 
-object mainclass {
+object cds_run {
 val usage =
   """
     |Usage: cds_run --route {routename} [--config /path/to/config.yml] [--input-inmeta /path/to/inmeta.xml] [--input-meta /path/to/meta.xml] [--input-media /path/to/mediafile] [--input-xml /path/to/xmlfile]
@@ -37,6 +38,9 @@ val usage =
           nextOption(map ++ Map('xml -> value.toString), tail)
         case "--input-media" :: value :: tail =>
           nextOption(map ++ Map('media -> value.toString), tail)
+        case "--help" :: value :: tail =>
+          println(usage)
+          map
         case option :: tail =>
           println("-WARNING: Unknown option "+option)
           map
@@ -44,13 +48,21 @@ val usage =
     }
     val options = nextOption(Map(),args.toList)
 
+    if(!options.contains('routename)) {
+      println("ERROR: You must specify a route to run using the --route argument")
+      System.exit(2)
+    }
+
     val config = if(options.contains('config)) {
       CDSConfig.load(options('config),options('routename))
     } else {
-      CDSConfig.load("src/test/resources/testconfig.yml",options('routename))
+      CDSConfig.load("/etc/cds_backend/cdsconfig.yml",options('routename))
     }
 
     val logcollection = config.getLogCollection("(core)","")
+    val f = logcollection.log("Starting up",None)
+    logcollection.waitFor(f,1.seconds)
+
     try {
       val storeOption = config.datastore
       storeOption match {
@@ -62,7 +74,9 @@ val usage =
       case e:RuntimeException=>
         logcollection.error(s"Unable to initialise datastore: ${e.getMessage}",None)
     }
-    val route = CDSRoute.fromFile(options('routename), config)
+    val route = CDSRoute.fromFile(options('routename), config, options)
     route.dump
+    route.runRoute(options)
+
   }
 }

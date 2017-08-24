@@ -15,14 +15,14 @@ object CDSReturnCode extends Enumeration {
   val SUCCESS, NOTFOUND, FAILURE, STOPROUTE, UNKNOWN = Value
 }
 
-case class CDSMethod(methodType: String,
-                     name:String,
-                     requiredFiles: Seq[String],
-                     params: Map[String,String],
-                     log:LogCollection,
-                     store:Option[Datastore],
-                     config: CDSConfig)
-    extends ExternalCommand {
+trait CDSMethod {
+  val methodType:String
+  val name:String
+  val requiredFiles: Seq[String]
+  val params: Map[String,String]
+  val log:LogCollection
+  val store: Option[Datastore]
+  val config:CDSConfig
 
   val METHODS_BASE_PATH = config.paths.get("methods") match {
     case Some(path)=>path
@@ -44,44 +44,7 @@ case class CDSMethod(methodType: String,
     }
   }
 
-  override def errHandler(input: InputStream): Unit = {
-    for(line <- Source.fromInputStream(input).getLines()){
-      log.relayMessage(LogMessage.fromString(line,Some(this)))
-    }
-  }
-
-  override def outputHandler(input: InputStream): Unit = {
-    for(line <- Source.fromInputStream(input).getLines()){
-      log.relayMessage(LogMessage.fromString(line,Some(this)))
-    }
-  }
-
-  def execute(fileCollection: FileCollection):CDSReturnCode.Value = {
-    log.log("Executing method " + name + " as " + methodType,Some(this))
-
-    findFile match {
-      case None=>
-        log.error("Could not find executable for "+name+" in "+ METHODS_BASE_PATH,None)
-        CDSReturnCode.NOTFOUND
-      case Some(path)=>
-        val p = runCommand(path.toString,Seq(),params ++ fileCollection.getEnvironmentMap(requiredFiles))
-        p.exitValue() match {
-          case 0=>
-            log.log("Method exited cleanly",Some(this))
-            CDSReturnCode.SUCCESS
-          case 1=>
-            log.warn("Method executed with failure",Some(this))
-            CDSReturnCode.FAILURE
-          case 2=>
-            log.warn("Method failed and signalled to stop block process",Some(this))
-            CDSReturnCode.STOPROUTE
-          case _=>
-            log.error("Method returned a non-standard failure code",Some(this))
-            CDSReturnCode.UNKNOWN
-        }
-    }
-
-  }
+  def execute(fileCollection: FileCollection):(CDSReturnCode.Value,List[FileCollection])
 
   def dump = { /*print out info to stdout */
     println("Method:")
@@ -89,5 +52,23 @@ case class CDSMethod(methodType: String,
     println("\tType: " + methodType)
     println("\tRequired files: " + requiredFiles)
     println("\tParameter args: " + params)
+  }
+}
+
+object CDSMethodFactory {
+  def newCDSMethod(methodType: String,
+    name:String,
+    requiredFiles: Seq[String],
+    params: Map[String,String],
+    log:LogCollection,
+    store:Option[Datastore],
+    config: CDSConfig,
+                   options:Map[Symbol,String]) = {
+
+    /*simple check from internally implemented pseudo-methods.*/
+    name match {
+      case "commandline"=>CDSMethodInternalCommandline(methodType,name,requiredFiles,params,log,store,config,options)
+      case _=>CDSMethodScript(methodType,name,requiredFiles,params,log,store,config)
+    }
   }
 }

@@ -15,6 +15,17 @@ class FileCollectionSpec extends FlatSpec with Matchers {
     fc.head should be (FileCollection("mediafile","inmetafile","metafile","xmlfile",u,fc.head.tempFile))
   }
 
+  it should "read values from commandline argument map" in {
+    val u = new URI("file:///path/to/datastore.db")
+    val info = Map('media->"/path/to/mediafile",'inmeta->"/path/to/inmetafile",
+                   'meta->"/path/to/metafile",'xml->"/path/to/xmlfile")
+    val fc = FileCollection.fromOptionMap(info,u)
+    fc.mediaFile should be ("/path/to/mediafile")
+    fc.inmetaFile should be ("/path/to/inmetafile")
+    fc.metaFile should be ("/path/to/metafile")
+    fc.xmlFile should be ("/path/to/xmlfile")
+  }
+
   it should "update by returning a new collection with moodified values" in {
     val u = new URI("file:///path/to/datastore.db")
     val fc_orig = FileCollection.fromTempFile("src/test/resources/tempfiles/basicoutput",None,Some(u))
@@ -61,5 +72,25 @@ class FileCollectionSpec extends FlatSpec with Matchers {
     assertThrows[RuntimeException] {
       fc.head.getEnvironmentMap(reqd)
     }
+  }
+
+  it should "validate whether it contains certain file references" in {
+    val u = new URI("file:///path/to/datastore.db")
+    val info = Map('media->"/path/to/mediafile",'inmeta->"/path/to/inmetafile",
+      'meta->"/path/to/metafile",'xml->"/path/to/xmlfile")
+    val fc = FileCollection.fromOptionMap(info,u)
+
+    fc.hasFiles(Seq("media","inmeta","meta","xml")) should be (true)
+    fc.hasFiles(Seq("media")) should be (true)
+    fc.hasFiles(Seq("inmeta")) should be (true)
+    fc.hasFiles(Seq("meta")) should be (true)
+    fc.hasFiles(Seq("xml")) should be (true)
+
+    val fc2 = FileCollection.fromOptionMap(Map('media->"/path/to/mediafile"),u)
+    fc2.hasFiles(Seq("media","inmeta","meta","xml")) should be (false)
+    fc2.hasFiles(Seq("media")) should be (true)
+    fc2.hasFiles(Seq("inmeta")) should be (false)
+    fc2.hasFiles(Seq("meta")) should be (false)
+    fc2.hasFiles(Seq("xml")) should be (false)
   }
 }
