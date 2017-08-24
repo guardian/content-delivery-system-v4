@@ -12,11 +12,12 @@ import java.net.URI
 class SqliteBackedDatastore(params:Map[String,String]) extends Datastore {
   val databasePath = params("databasepath") + "/" + params("routename") + ".db"
 
-  override def createNewDatastore(params: Map[String, String]) = Future[Boolean] {
+  override def createNewDatastore(params: Map[String, String]):Future[Boolean] = Future({
     val db = DriverManager.getConnection(s"jdbc:sqlite:$databasePath")
     val st = db.createStatement()
     st.setQueryTimeout(30)
 
+    var succeeded = true
     try {
       st.executeUpdate("CREATE TABLE sources (id integer primary key autoincrement,type,provider_method,ctime,filename,filepath)")
       st.executeUpdate("CREATE TABLE meta (id integer primary key autoincrement,source_id,key,value)")
@@ -24,15 +25,16 @@ class SqliteBackedDatastore(params:Map[String,String]) extends Datastore {
       st.executeUpdate("CREATE TABLE tracks (id integer primary key autoincrement,source_id,track_index,key,value)")
       st.executeUpdate("CREATE TABLE media (id integer primary key autoincrement,source_id,key,value)")
       st.executeUpdate("INSERT INTO system (schema_version,cds_version) VALUES (1.0,4.0)")
-      true
+      succeeded = true
     } catch {
       case e:SQLException=>
         println("Unable to set up datastore: " +e)
-        false
+        succeeded = false
     } finally {
       db.close()
     }
-  }
+    succeeded
+  })
 
   override def uri: URI = {
     new URI("file://" + databasePath)
@@ -71,6 +73,7 @@ class SqliteBackedDatastore(params:Map[String,String]) extends Datastore {
 
   override def setMulti(section: String, params: Map[String, String], whoami:String): Future[List[Boolean]] = Future {
     val db = DriverManager.getConnection(s"jdbc:sqlite:$databasePath")
+    var result = List()
     try {
       db.setAutoCommit(false)
       val sourceId = getSourceIdSync(whoami, "cds")
@@ -83,7 +86,7 @@ class SqliteBackedDatastore(params:Map[String,String]) extends Datastore {
           None
       }
 
-      maybeSt match {
+      val result = maybeSt match {
         case Some(st) =>
           val result = params.map(kvtuple =>
             try {
@@ -103,13 +106,13 @@ class SqliteBackedDatastore(params:Map[String,String]) extends Datastore {
             }
           ).toList
           db.commit()
-          result
         case None=>
           List()
       }
     } finally {
       db.close()
     }
+    result
   }
 
 
