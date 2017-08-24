@@ -118,14 +118,11 @@ class SqliteBackedDatastore(params:Map[String,String]) extends Datastore {
 
   }
 
-
   override def getMulti(section: String, keys: List[String]): Future[Map[String, String]] = Future {
     val db = DriverManager.getConnection(s"jdbc:sqlite:$databasePath")
-    println(s"database path is $databasePath")
     try {
-      val st = db.prepareStatement("SELECT value from meta where key=?")
-
       keys.map(k => {
+        val st = db.prepareStatement("SELECT value from meta where key=?")
         st.setString(1, k)
         val r = st.executeQuery()
         (k, r.getString(1))

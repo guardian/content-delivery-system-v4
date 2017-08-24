@@ -3,7 +3,7 @@ import datastore.SqliteBackedDatastore
 import org.scalatest.concurrent.{PatienceConfiguration, ScalaFutures}
 
 import scala.concurrent.Await
-import scala.concurrent.duration.{Deadline, Duration}
+import scala.concurrent.duration._
 
 class DatastoreSpec extends FlatSpec with Matchers{
   val dsProps = Map("databasepath"->"/tmp","routename"->"test")
@@ -11,7 +11,7 @@ class DatastoreSpec extends FlatSpec with Matchers{
 
   "An SQLiteBackedDatastore" should "create a new datastore file" in {
 
-    val response = Await.ready(store.createNewDatastore(Map()),Duration(1,"second")).value.get
+    val response = Await.ready(store.createNewDatastore(Map()),1.second).value.get
 
     println(s"Got response $response, ${response.isSuccess}")
     assert(response.isSuccess)
@@ -29,7 +29,7 @@ class DatastoreSpec extends FlatSpec with Matchers{
 
   it should "add a value to the store" in {
     val f = store.setMulti("meta",Map("food"->"spam","accompaniament"->"eggs","pudding"->"more eggs"),"test")
-    ScalaFutures.whenReady(f){
+    ScalaFutures.whenReady(f,PatienceConfiguration.Timeout(10 seconds)){
       _.foreach(x=>assert(x)) //assert that True is returned in each element of the list
     }
   }
