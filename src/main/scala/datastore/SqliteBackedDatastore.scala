@@ -90,7 +90,7 @@ class SqliteBackedDatastore(params:Map[String,String]) extends Datastore {
 
       maybeSt match {
         case Some(st) =>
-          params.map(kvtuple =>
+          val result = params.map(kvtuple =>
             try {
               st.setInt(1, sourceId)
               st.setString(2, kvtuple._1)
@@ -107,6 +107,8 @@ class SqliteBackedDatastore(params:Map[String,String]) extends Datastore {
                 false
             }
           ).toList
+          db.commit()
+          result
         case None=>
           List()
       }
@@ -121,15 +123,23 @@ class SqliteBackedDatastore(params:Map[String,String]) extends Datastore {
   override def getMulti(section: String, keys: List[String]): Future[Map[String, String]] = Future {
     val db = DriverManager.getConnection(s"jdbc:sqlite:$databasePath")
     try {
+      println(keys)
       keys.map(k => {
+        println(k)
         val st = db.prepareStatement("SELECT value from meta where key=?")
         st.setString(1, k)
-        val r = st.executeQuery()
-        (k, r.getString(1))
+        var r = st.executeQuery()
+        if(r.next) {
+          (k, r.getString(1))
+        } else {
+          (k, "(value not present)") //FIXME: better as an Option?
+        }
       }
       ).toMap[String, String]
-    } finally {
-      db.close()
+    } catch {
+      case e:SQLException=>
+        db.close()
+        throw e
     }
   }
 
