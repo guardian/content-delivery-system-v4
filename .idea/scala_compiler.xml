@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ScalaCompilerConfiguration">
+    <profile name="sbt 1" modules="content-delivery-system-v4_3626,content-delivery-system-v4" />
+  </component>
+</project>

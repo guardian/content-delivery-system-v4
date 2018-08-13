@@ -2,28 +2,35 @@ name := "content-delivery-system-v4"
 
 version := "1.0"
 
-scalaVersion := "2.11.8"
+scalaVersion := "2.12.3"
 
-libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.0" % "test"
+libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.5" % "test"
 
-// https://mvnrepository.com/artifact/org.scalamock/scalamock-core_2.11
-libraryDependencies += "org.scalamock" %% "scalamock-core" % "3.3.0"
+val scalaMockVersion = "3.6.0"
+// https://mvnrepository.com/artifact/org.scalamock/scalamock-core
+libraryDependencies += "org.scalamock" %% "scalamock-core" % scalaMockVersion
 
 // https://mvnrepository.com/artifact/org.scalamock/scalamock-scalatest-support_2.11
-libraryDependencies += "org.scalamock" %% "scalamock-scalatest-support" % "3.3.0"
+libraryDependencies += "org.scalamock" %% "scalamock-scalatest-support" % scalaMockVersion
 
 libraryDependencies += "org.scala-lang" % "scala-xml" % "2.11.0-M4"
 
-libraryDependencies += "org.apache.logging.log4j" % "log4j-core" % "2.7"
+val log4jVersion = "2.11.1"
 
-libraryDependencies += "org.apache.logging.log4j" % "log4j-api" % "2.7"
+libraryDependencies += "org.apache.logging.log4j" % "log4j-core" % log4jVersion
 
-libraryDependencies += "com.fasterxml.jackson.dataformat" % "jackson-dataformat-yaml" % "2.8.2"
+libraryDependencies += "org.apache.logging.log4j" % "log4j-api" % log4jVersion
 
-libraryDependencies += "com.fasterxml.jackson.core" % "jackson-databind" % "2.8.2"
 
-libraryDependencies += "com.fasterxml.jackson.module" % "jackson-module-scala_2.11" % "2.8.2"
+val jacksonVersion = "2.9.6"
+//update vulnerable jackson-databind
+// https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
+libraryDependencies += "com.fasterxml.jackson.core" % "jackson-databind" % jacksonVersion
+// https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core
+libraryDependencies += "com.fasterxml.jackson.core" % "jackson-core" % jacksonVersion
+libraryDependencies += "com.fasterxml.jackson.dataformat" % "jackson-dataformat-yaml" % jacksonVersion
+libraryDependencies += "com.fasterxml.jackson.module" %% "jackson-module-scala" % jacksonVersion
 
 libraryDependencies += "org.yaml" % "snakeyaml" % "1.17"
 // https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc
-libraryDependencies += "org.xerial" % "sqlite-jdbc" % "3.8.11.2"
+libraryDependencies += "org.xerial" % "sqlite-jdbc" % "3.23.1"

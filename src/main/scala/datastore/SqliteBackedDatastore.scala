@@ -12,6 +12,8 @@ class SqliteBackedDatastore(params:Map[String,String]) extends Datastore {
   val databasePath = params("databasepath") + "/" + params("routename") + ".db"
 
   override def createNewDatastore(params: Map[String, String]) = Future {
+    //need to explicitly load the driver: https://bitbucket.org/xerial/sqlite-jdbc
+    Class.forName("org.sqlite.JDBC")
     val db = DriverManager.getConnection(s"jdbc:sqlite:$databasePath")
     val st = db.createStatement()
     st.setQueryTimeout(30)
